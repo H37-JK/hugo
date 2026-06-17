@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }}</title>
+    <meta name="keywords" content="{{ .Title }}">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="{{ .Permalink }}"> <!-- 중복 문서 방지 핵심! -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ .Title }}">
+    <meta property="og:description" content="{{ .Params.description }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:site_name" content="홈케어 지역 서비스">
+    <!-- 아래 image 경로에 실제 이미지 파일 주소를 넣으세요 -->
+<!--    {{ if .Params.images }}-->
+<!--    {{ range .Params.images }}-->
+<!--    <meta property="og:image" content="{{ $.Site.BaseURL }}{{ . }}">-->
+<!--    {{ end }}-->
+<!--    <meta property="og:image:width" content="1200">-->
+<!--    <meta property="og:image:height" content="630">-->
+<!--    {{ end }}-->
+    <!-- 이 부분을 추가하세요 -->
+    {{ if .Params.description }}
+    <meta name="description" content="{{ .Params.description }}">
+    {{ else }}
+    <meta name="description" content="{{ .Site.Title }} - 전국 최저가 신속 출동 서비스">
+    {{ end }}
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white mx-auto">
+<header class="bg-white p-4 pl-0 max-w-3xl mx-auto">
+    <h2 class="text-xl font-bold">{{ .Params.title }} </h2>
+</header>
+
+<main>
+    {{ block "main" . }}{{ end }}
+</main>
+
+<footer class="p-8 text-center text-gray-500 text-sm">
+    © 2026 홈케어 | 본 사이트는 {{ .Params.region }} {{ .Params.category }} 전문 업체 안내 페이지입니다.
+</footer>
+</body>
+
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ToiletBusiness",
+        "name": "{{ .Title }}",
+        "url": "{{ .Permalink }}",
+        "image": [
+            {{ range $index, $element := .Params.images }}
+            {{ if $index }},{{ end }}"{{ $.Site.BaseURL | strings.TrimSuffix "/" }}{{ $element }}"
+            {{ end }}
+        ],
+        "description": "{{ .Params.description }}",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "{{ .Params.region }}",
+            "addressCountry": "KR"
+        }
+    }
+</script>
+</head>
+
+</html>
