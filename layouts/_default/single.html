@@ -33,6 +33,26 @@
                 <img src="/images/1.png" alt="전문가 출동 서비스" class="w-full h-auto object-cover">
         </div>
 
+
+        <div class="naver-thumbnail-area" style="display: none; gap: 4px; margin-bottom: 20px;">
+                <div style="flex: 1; aspect-ratio: 1/1; overflow: hidden;">
+                        <img src="/images/2.png" alt="서비스 사진" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1; aspect-ratio: 1/1; overflow: hidden;">
+                        <img src="/images/3.png" alt="서비스 사진" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1; aspect-ratio: 1/1; overflow: hidden;">
+                        <img src="/images/4.png" alt="서비스 사진" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1; aspect-ratio: 1/1; overflow: hidden;">
+                        <img src="/images/5.png" alt="서비스 사진" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1; aspect-ratio: 1/1; overflow: hidden;">
+                        <img src="/images/6.png" alt="서비스 사진" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+
+        </div>
+
         <section class="py-4 my-2 bg-white">
                 <div class="max-w-4xl mx-auto px-4">
                         <div class="mb-8 border-b-2 border-gray-100 pb-4">
@@ -296,12 +316,23 @@
 
 
         <div class="naver-thumbnail-area" style="display: flex; gap: 4px; margin-bottom: 20px;">
-                {{ range .Params.images }}
+<!--                {{ range .Params.images }}-->
                 <div style="flex: 1; aspect-ratio: 1/1; overflow: hidden;">
-                        <!-- alt 태그에 지역명을 꼭 포함하세요 -->
-                        <img src="{{ . }}" alt="{{ $.Params.region }} 현장 사진" style="width: 100%; height: 100%; object-cover: cover;">
+                        <img src="/images/2.png" alt="서비스 사진" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                {{ end }}
+                <div style="flex: 1; aspect-ratio: 1/1; overflow: hidden;">
+                        <img src="/images/3.png" alt="서비스 사진" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1; aspect-ratio: 1/1; overflow: hidden;">
+                        <img src="/images/4.png" alt="서비스 사진" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1; aspect-ratio: 1/1; overflow: hidden;">
+                        <img src="/images/5.png" alt="서비스 사진" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1; aspect-ratio: 1/1; overflow: hidden;">
+                        <img src="/images/6.png" alt="서비스 사진" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+<!--                {{ end }}-->
         </div>
 
         <div class="flex justify-center items-center gap-1 my-10 overflow-x-auto py-2">
