@@ -144,6 +144,9 @@ layout: "index"
         summary = f"{region} {category} 전문 업체입니다. 24시 신속 출동 및 정직한 비용으로 해결해 드립니다."
         unique_title = generate_random_title(region, category)
         unique_body = generate_random_body(region, category)
+        cat1 = get_random_category()
+        cat2 = get_random_category()
+        cat3 = get_random_category()
 
         # 서비스별 설명 추출
         sink_desc = get_service_description("싱크대") if "싱크대" in category else ""
@@ -174,6 +177,9 @@ semyondae_description: "{semyondae_desc}"
 baegwan_description: "{baegwan_desc}"
 hasu_desc: "{hasu_desc}"
 hwajang_Desc: "{hwajang_Desc}"
+cat1: "{cat1}"
+cat2: "{cat2}"
+cat3: "{cat3}"
 ---
 ''')
         counter += 1
@@ -182,6 +188,9 @@ hwajang_Desc: "{hwajang_Desc}"
     for region in regions:
         counter += 1
         category = get_category()
+        cat1 = get_random_category()
+        cat2 = get_random_category()
+        cat3 = get_random_category()
         summary = f"{region} {category} 전문 업체입니다. 24시 신속 출동 및 정직한 비용으로 해결해 드립니다."
         unique_title = generate_random_title(region, category)
         unique_body = generate_random_body(region, category)
@@ -215,6 +224,9 @@ semyondae_description: "{semyondae_desc}"
 baegwan_description: "{baegwan_desc}"
 hasu_desc: "{hasu_desc}"
 hwajang_Desc: "{hwajang_Desc}"
+cat1: "{cat1}"
+cat2: "{cat2}"
+cat3: "{cat3}"
 ---
 ''')
 
