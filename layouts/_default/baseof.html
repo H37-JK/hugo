@@ -26,11 +26,11 @@
     {{ else }}
     <meta name="description" content="{{ .Site.Title }} - 전국 최저가 신속 출동 서비스">
     {{ end }}
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/tailwind.js"></script>
 </head>
 <body class="bg-white mx-auto">
 <header class="bg-white p-4 pl-0 max-w-3xl mx-auto">
-    <h2 class="text-xl font-bold">{{ .Params.title }} </h2>
+    <h1 class="text-xl font-bold">{{ .Params.title }} </h1>
 </header>
 
 <main>
@@ -46,7 +46,7 @@
 <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "ToiletBusiness",
+        "@type": "PlumbingService",
         "name": "{{ .Title }}",
         "url": "{{ .Permalink }}",
         "image": [

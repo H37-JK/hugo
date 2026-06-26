@@ -23,12 +23,13 @@ CF_PROJECT_NAME = ""
 # headers = {"Authorization": f"Bearer {CF_API_TOKEN}", "Content-Type": "application/json"}
 
 # --- 기존 데이터 로직 (deploy.py와 동일) ---
-sites = [{"name": "homecarees-ssulbis"}, {"name": "recarees-semuns"}, {"name": "fullcarees-sujuns"}]
+sites = [{"name": "seoul"}, {"name": "paju"}, {"name": "gyungi"}]
 categories = [{"category": "변기"}, {"category": "세면대"}, {"category": "수전"}, {"category": "배관"}, {"category": "싱크대"},
               {"category": "하수구"},
               {"category": "화장실"}]
 dos = ['막힘', '교체', '수리', '고장', '뚫음']
 titles = ['업체', '10곳 비교', '업체 리스트', '업체', '업체', '업체']
+
 
 with open('dong.txt.new', 'r', encoding='utf-8') as f:
     regions = [line.strip() for line in f if line.strip()]
@@ -114,7 +115,7 @@ today_str = datetime.now().strftime("%Y-%m-%dT%H:%M:%S+09:00")
 def prepare_content(num, images_str):
     if os.path.exists("content"): shutil.rmtree("content")
     os.makedirs("content")
-
+    captions = []
     region = '서울 특별시'
     cat = get_random_category()
     unique_body = generate_random_body(region, cat)
@@ -139,14 +140,27 @@ layout: "index"
             f.write(f"[{reg}](/{regions.index(reg) + 1}/)  \n")
 
     counter = 1
+
     for region in regions:
-        category = get_random_category()
-        summary = f"{region} {category} 전문 업체입니다. 24시 신속 출동 및 정직한 비용으로 해결해 드립니다."
-        unique_title = generate_random_title(region, category)
-        unique_body = generate_random_body(region, category)
+        check = True
+        unique_title = ''
+        unique_body = ''
+        category = ''
+        while check:
+            category = get_category()
+            summary = f"{region} {category} 전문 업체입니다. 24시 신속 출동 및 정직한 비용으로 해결해 드립니다."
+            unique_title = generate_random_title(region, category)
+            unique_body = generate_random_body(region, category)
+            if unique_title not in captions:
+                captions.append(unique_title)
+                check = False
+            else:
+                check = True
         cat1 = get_random_category()
         cat2 = get_random_category()
         cat3 = get_random_category()
+        cat4 = get_random_category()
+        cat5 = get_random_category()
 
         # 서비스별 설명 추출
         sink_desc = get_service_description("싱크대") if "싱크대" in category else ""
@@ -180,6 +194,8 @@ hwajang_Desc: "{hwajang_Desc}"
 cat1: "{cat1}"
 cat2: "{cat2}"
 cat3: "{cat3}"
+cat4: "{cat4}"
+cat5: "{cat5}"
 ---
 ''')
         counter += 1
@@ -187,13 +203,28 @@ cat3: "{cat3}"
 
     for region in regions:
         counter += 1
-        category = get_category()
+        category = ''
+        check = True
+        unique_title = ''
+        unique_body = ''
+        category = ''
+        while check:
+            category = get_category()
+            summary = f"{region} {category} 전문 업체입니다. 24시 신속 출동 및 정직한 비용으로 해결해 드립니다."
+            unique_title = generate_random_title(region, category)
+            unique_body = generate_random_body(region, category)
+            if unique_title not in captions:
+                captions.append(unique_title)
+                check = False
+            else:
+                check = True
+
+
         cat1 = get_random_category()
         cat2 = get_random_category()
         cat3 = get_random_category()
-        summary = f"{region} {category} 전문 업체입니다. 24시 신속 출동 및 정직한 비용으로 해결해 드립니다."
-        unique_title = generate_random_title(region, category)
-        unique_body = generate_random_body(region, category)
+        cat4 = get_random_category()
+        cat5 = get_random_category()
 
         # 서비스별 설명 추출
         sink_desc = get_service_description("싱크대") if "싱크대" in category else ""
@@ -227,6 +258,8 @@ hwajang_Desc: "{hwajang_Desc}"
 cat1: "{cat1}"
 cat2: "{cat2}"
 cat3: "{cat3}"
+cat4: "{cat4}"
+cat5: "{cat5}"
 ---
 ''')
 
