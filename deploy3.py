@@ -262,6 +262,129 @@ cat4: "{cat4}"
 cat5: "{cat5}"
 ---
 ''')
+    for region in regions:
+        counter += 1
+        category = ''
+        check = True
+        unique_title = ''
+        unique_body = ''
+        category = ''
+        while check:
+            category = get_category()
+            summary = f"{region} {category} 전문 업체입니다. 24시 신속 출동 및 정직한 비용으로 해결해 드립니다."
+            unique_title = generate_random_title(region, category)
+            unique_body = generate_random_body(region, category)
+            if unique_title not in captions:
+                captions.append(unique_title)
+                check = False
+            else:
+                check = True
+
+
+        cat1 = get_random_category()
+        cat2 = get_random_category()
+        cat3 = get_random_category()
+        cat4 = get_random_category()
+        cat5 = get_random_category()
+
+        # 서비스별 설명 추출
+        sink_desc = get_service_description("싱크대") if "싱크대" in category else ""
+        sujun_desc = get_service_description("수전") if "수전" in category else ""
+        byeongi_desc = get_service_description("변기") if "변기" in category else ""
+        semyondae_desc = get_service_description("세면대") if "세면대" in category else ""
+        baegwan_desc = get_service_description("배관") if "배관" in category else ""
+        hasu_desc = get_service_description("하수구") if "하수구" in category else ""
+        hwajang_Desc = get_service_description("화장실") if "화장실" in category else ""
+
+        selected_imgs = random.sample(all_images, 6)
+        img_param = str(selected_imgs).replace("'", '"')
+
+        with open(f"content/{counter}.md", "w", encoding="utf-8") as f:
+            f.write(f'''---
+title: "{unique_title}"
+description: "{summary}"
+region: "{region}"
+category: "{category}"
+date: {today_str}
+images: {img_param}
+id: "{counter}"
+unique_body: "{unique_body}"
+sink_description: "{sink_desc}"
+sujun_description: "{sujun_desc}"
+byeongi_description: "{byeongi_desc}"
+semyondae_description: "{semyondae_desc}"
+baegwan_description: "{baegwan_desc}"
+hasu_desc: "{hasu_desc}"
+hwajang_Desc: "{hwajang_Desc}"
+cat1: "{cat1}"
+cat2: "{cat2}"
+cat3: "{cat3}"
+cat4: "{cat4}"
+cat5: "{cat5}"
+---
+''')
+
+    for region in regions:
+        counter += 1
+        category = ''
+        check = True
+        unique_title = ''
+        unique_body = ''
+        category = ''
+        while check:
+            category = get_category()
+            summary = f"{region} {category} 전문 업체입니다. 24시 신속 출동 및 정직한 비용으로 해결해 드립니다."
+            unique_title = generate_random_title(region, category)
+            unique_body = generate_random_body(region, category)
+            if unique_title not in captions:
+                captions.append(unique_title)
+                check = False
+            else:
+                check = True
+
+
+        cat1 = get_random_category()
+        cat2 = get_random_category()
+        cat3 = get_random_category()
+        cat4 = get_random_category()
+        cat5 = get_random_category()
+
+        # 서비스별 설명 추출
+        sink_desc = get_service_description("싱크대") if "싱크대" in category else ""
+        sujun_desc = get_service_description("수전") if "수전" in category else ""
+        byeongi_desc = get_service_description("변기") if "변기" in category else ""
+        semyondae_desc = get_service_description("세면대") if "세면대" in category else ""
+        baegwan_desc = get_service_description("배관") if "배관" in category else ""
+        hasu_desc = get_service_description("하수구") if "하수구" in category else ""
+        hwajang_Desc = get_service_description("화장실") if "화장실" in category else ""
+
+        selected_imgs = random.sample(all_images, 6)
+        img_param = str(selected_imgs).replace("'", '"')
+
+        with open(f"content/{counter}.md", "w", encoding="utf-8") as f:
+            f.write(f'''---
+title: "{unique_title}"
+description: "{summary}"
+region: "{region}"
+category: "{category}"
+date: {today_str}
+images: {img_param}
+id: "{counter}"
+unique_body: "{unique_body}"
+sink_description: "{sink_desc}"
+sujun_description: "{sujun_desc}"
+byeongi_description: "{byeongi_desc}"
+semyondae_description: "{semyondae_desc}"
+baegwan_description: "{baegwan_desc}"
+hasu_desc: "{hasu_desc}"
+hwajang_Desc: "{hwajang_Desc}"
+cat1: "{cat1}"
+cat2: "{cat2}"
+cat3: "{cat3}"
+cat4: "{cat4}"
+cat5: "{cat5}"
+---
+''')
 
 def deploy_to_cloudflare(site_name, project_name, output_dir):
     print(f"\n--- 🚀 [{site_name}] Pages 배포 시작 ---")
