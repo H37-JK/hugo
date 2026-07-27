@@ -21,8 +21,8 @@ categories = [
 dos = ['막힘', '교체', '수리', '고장', '뚫음']
 titles = ['업체', '10곳 비교', '업체 리스트', '업체', '업체', '업체']
 
-if os.path.exists('dong.txt.new'):
-    with open('dong.txt.new', 'r', encoding='utf-8') as f:
+if os.path.exists('dong2.txt'):
+    with open('dong2.txt', 'r', encoding='utf-8') as f:
         regions = [line.strip() for line in f if line.strip()]
 else:
     regions = ['경기도 파주시']
