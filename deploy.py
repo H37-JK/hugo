@@ -1,18 +1,36 @@
 import os
 import shutil
 import subprocess
-import requests
 from dotenv import load_dotenv
 from datetime import datetime
 import random
 
 load_dotenv()
-headers = {"Authorization": f"Bearer {os.getenv('NETLIFY_TOKEN')}"}
 
-sites = [{"name": "homecarees-ssulbis"}, {"name": "recarees-semuns"}, {"name": "fullcarees-sujuns"}]
-categories = [{"category": "변기"}, {"category": "세면대"}, {"category": "수전"}, {"category": "배관"}, {"category": "싱크대"},
-              {"category": "하수구"},
-              {"category": "화장실"}]
+# Cloudflare 설정
+# .env 파일에 다음을 추가해야 합니다:
+# CF_API_TOKEN=your_token
+# CF_ACCOUNT_ID=your_account_id
+# CF_API_TOKEN = os.getenv('CLOUDFLARE_API_TOKEN')
+# CF_ACCOUNT_ID = os.getenv('CLOUDFLARE_ACCOUNT_ID')
+# 구매하신 도메인을 여기에 입력하세요
+YOUR_DOMAIN = "housescares.com"
+
+# Cloudflare Pages 프로젝트명 (대시보드에서 미리 생성해둔 프로젝트명)
+CF_PROJECT_NAME = ""
+
+# headers = {"Authorization": f"Bearer {CF_API_TOKEN}", "Content-Type": "application/json"}
+
+sites = [{"name": "seoul"}, {"name": "paju"}, {"name": "gyungi"}]
+categories = [
+      {"category": "변기"}
+    , {"category": "세면대"}
+    , {"category": "수전"}
+    , {"category": "배관"}
+    , {"category": "싱크대"}
+    , {"category": "하수구"}
+    , {"category": "화장실"}
+]
 dos = ['막힘', '교체', '수리', '고장', '뚫음']
 titles = ['업체', '10곳 비교', '업체 리스트', '업체', '업체', '업체']
 
@@ -71,19 +89,19 @@ service_descriptions = {
         "화장실 타일 들뜸 및 파손 보수, 안전하고 깔끔하게 마무리해 드립니다.",
         "화장실에서 올라오는 원인 불명의 악취, 배관 및 환풍기 정밀 점검을 통해 원인을 뿌리 뽑습니다."
     ]
-
 }
 
 
 def get_service_description(category_string):
-    for cat, descs in service_descriptions.items():
+    for cat, desc in service_descriptions.items():
         if cat in category_string:
-            return random.choice(descs)
+            return random.choice(desc)
     return ""
 
 
 def get_random_category():
     return ", ".join([random.choice([c['category'] for c in categories]) + random.choice(dos) for _ in range(3)])
+
 
 def get_category():
     return random.choice([c['category'] for c in categories]) + random.choice(dos)
@@ -100,30 +118,10 @@ def generate_random_title(region, category):
 today_str = datetime.now().strftime("%Y-%m-%dT%H:%M:%S+09:00")
 
 
-def get_content_html(title, region, cat, body, naver_map, google_map):
-    img = random.choice(all_images)
-    return f'''{{{{< rawhtml >}}}}
-<div style="border: 2px solid #3498db; padding: 20px; border-radius: 10px; background-color: #f9f9f9; text-align: center;">
-    <h1 style="color: #2c3e50;">{title}</h1>
-    <div style="margin: 20px 0;"><img src="{img}" alt="서비스" style="max-width: 100%; height: auto; border-radius: 10px;"></div>
-    <div style="padding: 15px; background: #e1f5fe; border-left: 5px solid #03a9f4; margin: 15px 0;">
-        <p><strong>주요 서비스:</strong> {cat}</p>
-        <p><strong>지역:</strong> {region}</p>
-        <p>{body}</p>
-    </div>
-    <div style="margin-top: 20px;">
-        <a href="{naver_map}" target="_blank" style="background:#03c75a; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; margin:5px; display:inline-block;">네이버 지도</a>
-        <a href="{google_map}" target="_blank" style="background:#4285f4; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; margin:5px; display:inline-block;">구글 지도</a>
-    </div>
-</div>
-{{{{< /rawhtml >}}}}
-'''
-
-
 def prepare_content(num, images_str):
     if os.path.exists("content"): shutil.rmtree("content")
     os.makedirs("content")
-
+    captions = []
     region = '서울 특별시'
     cat = get_random_category()
     unique_body = generate_random_body(region, cat)
@@ -148,11 +146,27 @@ layout: "index"
             f.write(f"[{reg}](/{regions.index(reg) + 1}/)  \n")
 
     counter = 1
+
     for region in regions:
-        category = get_random_category()
-        summary = f"{region} {category} 전문 업체입니다. 24시 신속 출동 및 정직한 비용으로 해결해 드립니다."
-        unique_title = generate_random_title(region, category)
-        unique_body = generate_random_body(region, category)
+        check = True
+        unique_title = ''
+        unique_body = ''
+        category = ''
+        while check:
+            category = get_category()
+            summary = f"{region} {category} 전문 업체입니다. 24시 신속 출동 및 정직한 비용으로 해결해 드립니다."
+            unique_title = generate_random_title(region, category)
+            unique_body = generate_random_body(region, category)
+            if unique_title not in captions:
+                captions.append(unique_title)
+                check = False
+            else:
+                check = True
+        cat1 = get_random_category()
+        cat2 = get_random_category()
+        cat3 = get_random_category()
+        cat4 = get_random_category()
+        cat5 = get_random_category()
 
         # 서비스별 설명 추출
         sink_desc = get_service_description("싱크대") if "싱크대" in category else ""
@@ -183,18 +197,38 @@ semyondae_description: "{semyondae_desc}"
 baegwan_description: "{baegwan_desc}"
 hasu_desc: "{hasu_desc}"
 hwajang_Desc: "{hwajang_Desc}"
+cat1: "{cat1}"
+cat2: "{cat2}"
+cat3: "{cat3}"
+cat4: "{cat4}"
+cat5: "{cat5}"
 ---
 ''')
         counter += 1
 
-
     for region in regions:
         counter += 1
-        print(counter)
-        category = get_category()
-        summary = f"{region} {category} 전문 업체입니다. 24시 신속 출동 및 정직한 비용으로 해결해 드립니다."
-        unique_title = generate_random_title(region, category)
-        unique_body = generate_random_body(region, category)
+        category = ''
+        check = True
+        unique_title = ''
+        unique_body = ''
+        category = ''
+        while check:
+            category = get_category()
+            summary = f"{region} {category} 전문 업체입니다. 24시 신속 출동 및 정직한 비용으로 해결해 드립니다."
+            unique_title = generate_random_title(region, category)
+            unique_body = generate_random_body(region, category)
+            if unique_title not in captions:
+                captions.append(unique_title)
+                check = False
+            else:
+                check = True
+
+        cat1 = get_random_category()
+        cat2 = get_random_category()
+        cat3 = get_random_category()
+        cat4 = get_random_category()
+        cat5 = get_random_category()
 
         # 서비스별 설명 추출
         sink_desc = get_service_description("싱크대") if "싱크대" in category else ""
@@ -209,7 +243,7 @@ hwajang_Desc: "{hwajang_Desc}"
         img_param = str(selected_imgs).replace("'", '"')
 
         with open(f"content/{counter}.md", "w", encoding="utf-8") as f:
-         f.write(f'''---
+            f.write(f'''---
 title: "{unique_title}"
 description: "{summary}"
 region: "{region}"
@@ -225,37 +259,163 @@ semyondae_description: "{semyondae_desc}"
 baegwan_description: "{baegwan_desc}"
 hasu_desc: "{hasu_desc}"
 hwajang_Desc: "{hwajang_Desc}"
+cat1: "{cat1}"
+cat2: "{cat2}"
+cat3: "{cat3}"
+cat4: "{cat4}"
+cat5: "{cat5}"
+---
+''')
+    for region in regions:
+        counter += 1
+        category = ''
+        check = True
+        unique_title = ''
+        unique_body = ''
+        category = ''
+        while check:
+            category = get_category()
+            summary = f"{region} {category} 전문 업체입니다. 24시 신속 출동 및 정직한 비용으로 해결해 드립니다."
+            unique_title = generate_random_title(region, category)
+            unique_body = generate_random_body(region, category)
+            if unique_title not in captions:
+                captions.append(unique_title)
+                check = False
+            else:
+                check = True
+
+        cat1 = get_random_category()
+        cat2 = get_random_category()
+        cat3 = get_random_category()
+        cat4 = get_random_category()
+        cat5 = get_random_category()
+
+        # 서비스별 설명 추출
+        sink_desc = get_service_description("싱크대") if "싱크대" in category else ""
+        sujun_desc = get_service_description("수전") if "수전" in category else ""
+        byeongi_desc = get_service_description("변기") if "변기" in category else ""
+        semyondae_desc = get_service_description("세면대") if "세면대" in category else ""
+        baegwan_desc = get_service_description("배관") if "배관" in category else ""
+        hasu_desc = get_service_description("하수구") if "하수구" in category else ""
+        hwajang_Desc = get_service_description("화장실") if "화장실" in category else ""
+
+        selected_imgs = random.sample(all_images, 6)
+        img_param = str(selected_imgs).replace("'", '"')
+
+        with open(f"content/{counter}.md", "w", encoding="utf-8") as f:
+            f.write(f'''---
+title: "{unique_title}"
+description: "{summary}"
+region: "{region}"
+category: "{category}"
+date: {today_str}
+images: {img_param}
+id: "{counter}"
+unique_body: "{unique_body}"
+sink_description: "{sink_desc}"
+sujun_description: "{sujun_desc}"
+byeongi_description: "{byeongi_desc}"
+semyondae_description: "{semyondae_desc}"
+baegwan_description: "{baegwan_desc}"
+hasu_desc: "{hasu_desc}"
+hwajang_Desc: "{hwajang_Desc}"
+cat1: "{cat1}"
+cat2: "{cat2}"
+cat3: "{cat3}"
+cat4: "{cat4}"
+cat5: "{cat5}"
+---
+''')
+
+    for region in regions:
+        counter += 1
+        category = ''
+        check = True
+        unique_title = ''
+        unique_body = ''
+        category = ''
+        while check:
+            category = get_category()
+            summary = f"{region} {category} 전문 업체입니다. 24시 신속 출동 및 정직한 비용으로 해결해 드립니다."
+            unique_title = generate_random_title(region, category)
+            unique_body = generate_random_body(region, category)
+            if unique_title not in captions:
+                captions.append(unique_title)
+                check = False
+            else:
+                check = True
+
+        cat1 = get_random_category()
+        cat2 = get_random_category()
+        cat3 = get_random_category()
+        cat4 = get_random_category()
+        cat5 = get_random_category()
+
+        # 서비스별 설명 추출
+        sink_desc = get_service_description("싱크대") if "싱크대" in category else ""
+        sujun_desc = get_service_description("수전") if "수전" in category else ""
+        byeongi_desc = get_service_description("변기") if "변기" in category else ""
+        semyondae_desc = get_service_description("세면대") if "세면대" in category else ""
+        baegwan_desc = get_service_description("배관") if "배관" in category else ""
+        hasu_desc = get_service_description("하수구") if "하수구" in category else ""
+        hwajang_Desc = get_service_description("화장실") if "화장실" in category else ""
+
+        selected_imgs = random.sample(all_images, 6)
+        img_param = str(selected_imgs).replace("'", '"')
+
+        with open(f"content/{counter}.md", "w", encoding="utf-8") as f:
+            f.write(f'''---
+title: "{unique_title}"
+description: "{summary}"
+region: "{region}"
+category: "{category}"
+date: {today_str}
+images: {img_param}
+id: "{counter}"
+unique_body: "{unique_body}"
+sink_description: "{sink_desc}"
+sujun_description: "{sujun_desc}"
+byeongi_description: "{byeongi_desc}"
+semyondae_description: "{semyondae_desc}"
+baegwan_description: "{baegwan_desc}"
+hasu_desc: "{hasu_desc}"
+hwajang_Desc: "{hwajang_Desc}"
+cat1: "{cat1}"
+cat2: "{cat2}"
+cat3: "{cat3}"
+cat4: "{cat4}"
+cat5: "{cat5}"
 ---
 ''')
 
 
+def deploy_to_cloudflare(site_name, project_name, output_dir):
+    print(f"\n--- 🚀 [{site_name}] Pages 배포 시작 ---")
+    try:
+        target_url = f"https://{site_name}.{YOUR_DOMAIN}"
+        # 1. Hugo 빌드
+        subprocess.run(f'hugo -b "{target_url}" --destination {output_dir} --cleanDestinationDir', shell=True,
+                       check=True)
+        # 2. Pages 배포
+        cmd = f"wrangler pages deploy {output_dir} --project-name={project_name}"
+        subprocess.run(cmd, shell=True, check=True)
+        print(f"✅ [{site_name}] 배포 성공: {target_url}")
+    except Exception as e:
+        print(f"❌ 배포 실패: {e}")
+
+
 def deploy_all():
-    for i, site in enumerate(sites, start=1):
+    for i, site in enumerate(sites):
         site_name = site['name']
-        print(f"\n--- 🚀 [{site_name}] 배포 프로세스 시작 ---")
+        project_name = site['name']
         output_dir = f"public_{site_name}"
+
+        # 기존의 prepare_content 로직 호출
         prepare_content(i, "")
-        subprocess.run(f'hugo -b "https://{site_name}.netlify.app/" --destination {output_dir} --cleanDestinationDir',
-                       shell=True, check=True)
+        print(project_name)
 
-        if os.path.exists(f"{output_dir}/sitemap.xml"):
-            with open(f"{output_dir}/sitemap.xml", 'r', encoding='utf-8') as f:
-                content = f.read()
-            idx = content.find('<?xml')
-            if idx != -1:
-                with open(f"{output_dir}/sitemap.xml", 'w', encoding='utf-8') as f:
-                    f.write(content[idx:].strip())
-
-        try:
-            res = requests.post("https://api.netlify.com/api/v1/sites", headers=headers, json={"name": site_name})
-            site_id = res.json().get('id') if res.status_code == 200 else next(
-                s['id'] for s in requests.get("https://api.netlify.com/api/v1/sites", headers=headers).json() if
-                s['name'] == site_name)
-            subprocess.run(["netlify", "deploy", "--prod", "--dir", output_dir, "--site", site_id], shell=True,
-                           check=True)
-            print(f"✅ {site_name} 배포 완료!")
-        except Exception as e:
-            print(f"❌ 배포 실패: {e}")
+        deploy_to_cloudflare(site_name, project_name, output_dir)
+        subprocess.run(f"wrangler pages deploy {output_dir} --project-name={project_name}", shell=True, check=True)
 
 
 if __name__ == "__main__":
