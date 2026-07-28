@@ -7,7 +7,7 @@ import random
 
 load_dotenv()
 
-your_domain = "housecares.com"
+your_domain = "housescares.com"
 sites = [{"name": "seoul"}, {"name": "paju"}, {"name": "gyungi"}]
 categories = [
     {"category": "변기"},
@@ -208,7 +208,7 @@ layout: "index"
             with open(file_path, "w", encoding="utf-8") as f:
                 f.write(f'''---
 title: "{title}"
-description: "{description}"
+description: "{body}"
 region: "{reg}"
 category: "{cat}"
 date: "{today_str}"
