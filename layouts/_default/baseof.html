@@ -27,18 +27,28 @@
     <meta name="description" content="{{ .Site.Title }} - 전국 최저가 신속 출동 서비스">
     {{ end }}
     <script src="/js/tailwind.js"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <!-- FontAwesome 아이콘 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: "Pretendard", sans-serif; word-break: keep-all; }
+    </style>
+
+    <style>
+        body { font-family: "Pretendard", sans-serif; word-break: keep-all; }
+    </style>
 </head>
-<body class="bg-white mx-auto">
-<header class="bg-white p-4 pl-0 max-w-3xl mx-auto">
-    <h1 class="text-xl font-bold">{{ .Params.title }} </h1>
-</header>
+<!--<body class="bg-white mx-auto">-->
+<!--<header class="bg-white p-4 pl-0 max-w-3xl mx-auto">-->
+<!--    <h1 class="text-xl font-bold">{{ .Params.title }} </h1>-->
+<!--</header>-->
 
 <main>
     {{ block "main" . }}{{ end }}
 </main>
 
 
-</body>
+<!--</body>-->
 
 
 <script type="application/ld+json">

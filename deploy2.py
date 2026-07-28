@@ -7,8 +7,8 @@ import random
 
 load_dotenv()
 
-your_domain = "housescares.com"
-sites = [{"name": "seoul"}, {"name": "paju"}, {"name": "gyungi"}]
+your_domain = "ssakddula.com"
+sites = [{"name": "hasu"}, {"name": "semun"}, {"name": "toilet"}]
 categories = [
     {"category": "변기"},
     {"category": "세면대"},
@@ -18,8 +18,8 @@ categories = [
     {"category": "하수구"},
     {"category": "화장실"}
 ]
-dos = ['막힘', '교체', '수리', '고장', '뚫음']
-titles = ['업체', '10곳 비교', '업체 리스트', '업체', '업체', '업체']
+dos = ['막힘', '교체', '수리', '고장', '뚫음', '문제', '수리', '교체', '고장', '막힘']
+titles = ['업체', '10곳 비교', '업체 리스트', '업체', '업체', '업체', '현금 영수증 가능한 곳', '비교', '리스트', '전문 업체', '서비스 업체']
 
 if os.path.exists('dong2.txt'):
     with open('dong2.txt', 'r', encoding='utf-8') as f:
@@ -28,6 +28,7 @@ else:
     regions = ['경기도 파주시']
 
 all_images = [f"/images/{i}.png" for i in range(1, 7)]
+work_images = [f"/images/work/{i}.jpg" for i in range(1, 46)]
 
 service_descriptions = {
     "변기": [
@@ -127,12 +128,15 @@ def get_random_title(region, category):
     return f"{region} {category} {random.choice(titles)}"
 
 
-def prepare_content(content_dir):
+def prepare_content(content_dir, site):
     if os.path.exists(content_dir):
         shutil.rmtree(content_dir)
     os.makedirs(content_dir)
-
+    file_name = f"{site}_{your_domain}.txt"
     captions = []
+    # with open(file_name, "r", encoding="utf-8") as f:
+        # captions = f.read().split(" ")
+
 
     region = '경기도 파주시'
     category = get_category_list()
@@ -141,7 +145,14 @@ def prepare_content(content_dir):
     description = get_random_body(region, category)
     selected_images = random.sample(all_images, 6)
     images = str(selected_images).replace("'", '"')
-
+    w_images = random.sample(work_images, 7)
+    work_image1 = w_images[0]
+    work_image2 = w_images[1]
+    work_image3 = w_images[2]
+    work_image4 = w_images[3]
+    work_image5 = w_images[4]
+    work_image6 = w_images[5]
+    work_image7 = w_images[6]
     # index 파일 생성
     index_path = os.path.join(content_dir, "_index.md")
     with open(index_path, "w", encoding="utf-8") as f:
@@ -153,6 +164,13 @@ category: "{category}"
 date: "{today_str}"
 unique_body: "{body}"
 images: {images}
+work_image1: {work_image1}
+work_image2: {work_image2}
+work_image3: {work_image3}
+work_image4: {work_image4}
+work_image5: {work_image5}
+work_image6: {work_image6}
+work_image7: {work_image7}
 id: "0"
 layout: "index"
 ---
@@ -160,7 +178,7 @@ layout: "index"
 
     counter = 1
 
-    for i in range(1, 4):
+    for i in range(1, 7):
         for reg in regions:
             check = True
             title = ''
@@ -203,6 +221,15 @@ layout: "index"
             hwajang_desc2 = get_service_description("화장실") if "화장실" in cat else ""
             hwajang_desc3 = get_service_description("화장실") if "화장실" in cat else ""
 
+            w_images = random.sample(work_images, 7)
+            work_image1 = w_images[0]
+            work_image2 = w_images[1]
+            work_image3 = w_images[2]
+            work_image4 = w_images[3]
+            work_image5 = w_images[4]
+            work_image6 = w_images[5]
+            work_image7 = w_images[6]
+
             # individual markdown 파일 생성
             file_path = os.path.join(content_dir, f"{counter}.md")
             with open(file_path, "w", encoding="utf-8") as f:
@@ -214,6 +241,7 @@ category: "{cat}"
 date: "{today_str}"
 unique_body: "{body}"
 images: {images}
+id: "{counter}"
 sink_description: "{sink_desc}"
 sink_description3: "{sink_desc2}"
 sink_description2: "{sink_desc3}"
@@ -240,9 +268,19 @@ cat2: "{category2}"
 cat3: "{category3}"
 cat4: "{category4}"
 cat5: "{category5}"
+work_image1: {work_image1}
+work_image2: {work_image2}
+work_image3: {work_image3}
+work_image4: {work_image4}
+work_image5: {work_image5}
+work_image6: {work_image6}
+work_image7: {work_image7}
 ---
 ''')
             counter += 1
+
+            with open(file_name, "w", encoding="utf-8") as f:
+                f.write("\n".join(captions))  # \n 은 줄바꿈(엔터)입니다.
 
 
 def deploy_to_cloudflare(site_name, content_dir, output_dir):
@@ -254,9 +292,9 @@ def deploy_to_cloudflare(site_name, content_dir, output_dir):
         subprocess.run(cmd, shell=True, check=True)
         print(f"✅ [{site_name}] 빌드 성공: {target_url} (소스: {content_dir} -> 출력: {output_dir})")
 
-        # cmd_deploy = f"wrangler pages deploy {output_dir} --project-name={site_name}"
-        # subprocess.run(cmd_deploy, shell=True, check=True)
-        # print(f"✅ [{site_name}] 배포 성공: {target_url}")
+        cmd_deploy = f"wrangler pages deploy {output_dir} --project-name={site_name}"
+        subprocess.run(cmd_deploy, shell=True, check=True)
+        print(f"✅ [{site_name}] 배포 성공: {target_url}")
     except Exception as e:
         print(f"❌ 배포/빌드 실패: {e}")
 
@@ -264,12 +302,16 @@ def deploy_to_cloudflare(site_name, content_dir, output_dir):
 def deploy():
     for site in sites:
         site_name = site['name']
-        content_dir = f"content_{site_name}"
-        output_dir = f"public_{site_name}"
+        content_dir = f"content_{site_name}_{your_domain}"
+        output_dir = f"public_{site_name}_{your_domain}"
 
-        prepare_content(content_dir)
+        prepare_content(content_dir, site_name)
 
         deploy_to_cloudflare(site_name, content_dir, output_dir)
+        cmd_deploy = f"rmdir /s /q {content_dir}"
+        subprocess.run(cmd_deploy, shell=True, check=True)
+        cmd_deploy = f"rmdir /s /q {output_dir}"
+        subprocess.run(cmd_deploy, shell=True, check=True)
 
 
 if __name__ == "__main__":

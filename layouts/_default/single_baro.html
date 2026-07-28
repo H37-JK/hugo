@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>바로설비 - 변기·세면대·욕실 리모델링 전문 기술팀</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Pretendard 폰트 -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <!-- FontAwesome 아이콘 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: "Pretendard", sans-serif; word-break: keep-all; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 pb-20 md:pb-0">
+
+<!-- 1. 상단 전문 기사 출동 상단바 -->
+<div class="bg-blue-600 text-white text-xs py-2 px-4 text-center font-bold tracking-wide">
+    ⚡ 수도권 당일/예약 출동 가능 · 전문 자격 기사 직접 시공 · 정찰제 운영
+</div>
+
+<!-- 2. 헤더 -->
+<header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-5 py-4 flex justify-between items-center">
+    <div class="flex items-center gap-2">
+        <div class="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black text-lg shadow-lg shadow-blue-500/30">
+            <i class="fa-solid fa-wrench"></i>
+        </div>
+        <span class="text-xl font-black tracking-tight text-white">바스닥터 <span class="text-xs text-blue-400 font-normal ml-1">PRO</span></span>
+    </div>
+    <a href="tel:01055215441" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-extrabold px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-lg shadow-blue-600/30">
+        <i class="fa-solid fa-phone"></i>
+        <span>빠른 전화상담</span>
+    </a>
+</header>
+
+<!-- 3. 메인 히어로 (전문 기술팀 컨셉) -->
+<section class="relative pt-12 pb-16 px-5 text-center overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950">
+    <!-- 배경 디테일 빛 효과 -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-xl mx-auto relative z-10">
+        <div class="inline-flex items-center gap-2 bg-slate-800/80 border border-slate-700 text-blue-400 text-xs font-bold px-3 py-1.5 rounded-full mb-6">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            실시간 현장 기사배치 중
+        </div>
+
+        <h1 class="text-3xl md:text-4xl font-black leading-tight mb-4 text-white">
+            변기·세면대 단품 교체부터<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">욕실 전체 리모델링까지</span>
+        </h1>
+
+        <p class="text-slate-400 text-sm md:text-base mb-8">
+            거품 많은 인테리어 업체는 그만! <br class="hidden sm:inline">
+            욕실 전문 설비 기사가 직접 방문하여 깔끔하게 해결합니다.
+        </p>
+
+        <!-- 4개 핵심 서비스 바로가기 탭 (아이콘 중심) -->
+        <div class="grid grid-cols-4 gap-2 mb-8 text-left">
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-3 text-center">
+                <i class="fa-solid fa-toilet text-2xl text-blue-400 mb-2"></i>
+                <div class="text-xs font-bold text-slate-200">변기 교체</div>
+            </div>
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-3 text-center">
+                <i class="fa-solid fa-sink text-2xl text-cyan-400 mb-2"></i>
+                <div class="text-xs font-bold text-slate-200">세면대/수전</div>
+            </div>
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-3 text-center">
+                <i class="fa-solid fa-shower text-2xl text-sky-400 mb-2"></i>
+                <div class="text-xs font-bold text-slate-200">욕실 리모델링</div>
+            </div>
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-3 text-center">
+                <i class="fa-solid fa-droplet text-2xl text-teal-400 mb-2"></i>
+                <div class="text-xs font-bold text-slate-200">누수/방수</div>
+            </div>
+        </div>
+
+        <!-- 빠른 견적신청 카드 -->
+        <div id="quote-form" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 text-left shadow-2xl relative">
+            <h3 class="text-lg font-bold text-white mb-2 flex items-center justify-between">
+                <span>⚡ 1분 간편 견적 신청</span>
+                <span class="text-xs text-blue-400 font-normal">비용 즉시 안내</span>
+            </h3>
+            <p class="text-xs text-slate-400 mb-6">원하시는 작업을 선택해주시면 기사가 확인 후 연락드립니다.</p>
+
+            <form onsubmit="handleForm(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1.5">필요한 작업 선택</label>
+                    <select class="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500 text-sm">
+                        <option>🚽 양변기 교체 / 재시공</option>
+                        <option>🚰 세면대 & 수전 교체</option>
+                        <option>🛁 욕실 전체 리모델링</option>
+                        <option>🛠️ 부분 수리 (해바라기수전/장/거울)</option>
+                        <option>💧 누수 점검 및 방수 공사</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 mb-1.5">성함</label>
+                        <input type="text" placeholder="홍길동" required class="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 mb-1.5">연락처</label>
+                        <input type="tel" placeholder="010-0000-0000" required class="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1.5">지역 (시/군/구)</label>
+                    <input type="text" placeholder="예: 서울 강남구 / 경기 성남시" required class="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 text-sm">
+                </div>
+
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-extrabold py-4 rounded-xl text-base transition shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 mt-2">
+                    <span>무료 견적/상담 신청하기</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- 4. 전문 서비스 및 투명 가격표 (핵심!) -->
+<section class="py-16 px-5 max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+        <h2 class="text-2xl font-black text-white mb-2">바스닥터 전문 시공 항목</h2>
+        <p class="text-slate-400 text-sm">중개 수수료 없이 기사 직접 시공으로 정찰제를 준수합니다.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <!-- 서비스 1: 변기 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
+            <div class="flex justify-between items-start mb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-blue-500/10 border border-blue-500/20 rounded-xl flex items-center justify-center text-blue-400 text-xl">
+                        <i class="fa-solid fa-toilet"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-base">양변기 교체 / 재시공</h3>
+                        <span class="text-xs text-slate-400">투피스/치마형/비데일체형</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-2xl font-black text-blue-400 mb-4">15만원 ~ <span class="text-xs text-slate-500 font-normal">(자재+시공비 포함)</span></div>
+            <ul class="text-xs text-slate-400 space-y-2 border-t border-slate-800 pt-4">
+                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-500"></i> 기존 변기 철거 및 수거 무료</li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-500"></i> 악취 방지 냄새 트랩/정심 시공 기본 포함</li>
+            </ul>
+        </div>
+
+        <!-- 서비스 2: 세면대 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
+            <div class="flex justify-between items-start mb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-cyan-500/10 border border-cyan-500/20 rounded-xl flex items-center justify-center text-cyan-400 text-xl">
+                        <i class="fa-solid fa-sink"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-base">세면대 & 수전 교체</h3>
+                        <span class="text-xs text-slate-400">긴다리/반다리/일체형 세면대</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-2xl font-black text-cyan-400 mb-4">14만원 ~ <span class="text-xs text-slate-500 font-normal">(자재+시공비 포함)</span></div>
+            <ul class="text-xs text-slate-400 space-y-2 border-t border-slate-800 pt-4">
+                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-500"></i> 국산 고급 수전 및 자동 폽업 교체</li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-500"></i> 덜렁거림 없는 튼튼한 벽면 앙카 고정</li>
+            </ul>
+        </div>
+
+        <!-- 서비스 3: 전체 리모델링 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
+            <div class="flex justify-between items-start mb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-sky-500/10 border border-sky-500/20 rounded-xl flex items-center justify-center text-sky-400 text-xl">
+                        <i class="fa-solid fa-shower"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-base">욕실 전체 리모델링</h3>
+                        <span class="text-xs text-slate-400">호텔식 타일 / 덧방 & 올철거</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-2xl font-black text-sky-400 mb-4">180만원 ~ <span class="text-xs text-slate-500 font-normal">(패키지 정찰제)</span></div>
+            <ul class="text-xs text-slate-400 space-y-2 border-t border-slate-800 pt-4">
+                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-500"></i> 하루(1일) 만에 끝나는 속성 원데이 시공</li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-500"></i> 타일, 도기, 수전, 천장 LED 풀세트</li>
+            </ul>
+        </div>
+
+        <!-- 서비스 4: 누수 및 수리 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
+            <div class="flex justify-between items-start mb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-teal-500/10 border border-teal-500/20 rounded-xl flex items-center justify-center text-teal-400 text-xl">
+                        <i class="fa-solid fa-wrench"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-base">부분 수리 & 누수/방수</h3>
+                        <span class="text-xs text-slate-400">해바라기수전/장거울/방수</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-2xl font-black text-teal-400 mb-4">5만원 ~ <span class="text-xs text-slate-500 font-normal">(작업별 맞춤견적)</span></div>
+            <ul class="text-xs text-slate-400 space-y-2 border-t border-slate-800 pt-4">
+                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-500"></i> 욕실 백시멘트/실리콘 재시공</li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-500"></i> 미끄럼 방지 타일 및 안전 바 설치</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<!-- 5. 기술진 신뢰 포인트 (3개) -->
+<section class="bg-slate-900 border-y border-slate-800 py-16 px-5">
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div>
+            <div class="w-14 h-14 bg-blue-600/20 text-blue-400 rounded-2xl flex items-center justify-center mx-auto text-2xl mb-4 border border-blue-500/30">
+                <i class="fa-solid fa-user-gear"></i>
+            </div>
+            <h3 class="font-bold text-white text-lg mb-2">10년+ 경력 베테랑 기사</h3>
+            <p class="text-slate-400 text-xs leading-relaxed">하청 알바 기사를 쓰지 않고 검증된 설비 전문 기사가 직접 현장에 방문합니다.</p>
+        </div>
+        <div>
+            <div class="w-14 h-14 bg-blue-600/20 text-blue-400 rounded-2xl flex items-center justify-center mx-auto text-2xl mb-4 border border-blue-500/30">
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+            </div>
+            <h3 class="font-bold text-white text-lg mb-2">현장 추가금 절대 없음</h3>
+            <p class="text-slate-400 text-xs leading-relaxed">사전 안내해 드린 정찰 가격 그대로 시공하며 말도 안 되는 부당 추가금을 받지 않습니다.</p>
+        </div>
+        <div>
+            <div class="w-14 h-14 bg-blue-600/20 text-blue-400 rounded-2xl flex items-center justify-center mx-auto text-2xl mb-4 border border-blue-500/30">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 class="font-bold text-white text-lg mb-2">1년 책임 무상 A/S</h3>
+            <p class="text-slate-400 text-xs leading-relaxed">시공 후 혹시라도 발생할 수 있는 누수나 하자 발생 시 100% 무상 처리해 드립니다.</p>
+        </div>
+    </div>
+</section>
+
+<!-- 6. 현장 사진 갤러리 (Before / After 느낌) -->
+<section class="py-16 px-5 max-w-4xl mx-auto">
+    <div class="text-center mb-10">
+        <h2 class="text-2xl font-black text-white mb-2">실제 시공 현장 사진</h2>
+        <p class="text-slate-400 text-sm">바스닥터 기사들이 최근 작업한 현장입니다.</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=400&q=80" class="w-full h-32 object-cover" alt="시공사진">
+            <div class="p-3 text-xs font-bold text-slate-300">변기/세면대 단품 교체</div>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=400&q=80" class="w-full h-32 object-cover" alt="시공사진">
+            <div class="p-3 text-xs font-bold text-slate-300">호텔식 타일 리모델링</div>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=400&q=80" class="w-full h-32 object-cover" alt="시공사진">
+            <div class="p-3 text-xs font-bold text-slate-300">해바라기 수전 설치</div>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=400&q=80" class="w-full h-32 object-cover" alt="시공사진">
+            <div class="p-3 text-xs font-bold text-slate-300">슬라이딩 수납장 교체</div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. 푸터 -->
+<footer class="bg-slate-900 text-slate-500 py-10 px-5 text-xs border-t border-slate-800">
+    <div class="max-w-4xl mx-auto space-y-2">
+        <p class="text-slate-300 font-bold text-sm mb-2">바스닥터 (욕실·설비 전문 시공팀)</p>
+        <p>사업자등록번호: 000-00-00000 | 대표: 홍길동</p>
+        <p>주소: 서울특별시 OOO구 OOO로 123</p>
+        <p>고객센터: 010-0000-0000 (연중무휴 08:00 ~ 20:00)</p>
+        <p class="pt-4 text-slate-600">Copyright © 바스닥터. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- 8. 모바일 전용 하단 고정 액션바 -->
+<div class="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 p-3 flex gap-2 z-50 md:hidden">
+    <a href="tel:010-0000-0000" class="flex-1 bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 text-center rounded-xl text-sm flex items-center justify-center gap-2 border border-slate-700">
+        <i class="fa-solid fa-phone text-blue-400"></i>
+        <span>전화 문의</span>
+    </a>
+    <a href="#quote-form" class="flex-[1.3] bg-blue-600 hover:bg-blue-500 text-white font-extrabold py-3 text-center rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30">
+        <i class="fa-solid fa-calculator"></i>
+        <span>빠른 견적 받기</span>
+    </a>
+</div>
+
+<script>
+    function handleForm(e) {
+        e.preventDefault();
+        alert("견적 신청이 완료되었습니다!\n담당 기사가 확인 후 빠르게 연락드리겠습니다.");
+        e.target.reset();
+    }
+</script>
+</body>
+</html>
