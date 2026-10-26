@@ -457,7 +457,7 @@ function getHomepageAssertions(): HtmlAssertion[] {
 /**
  * Assert that the generated homepage looks like a real themed render.
  *
- * @param homepagePath Absolute path to `public/index.html`.
+ * @param homepagePath Absolute path to `public/baro.html`.
  * @throws Error when one or more assertions fail.
  */
 async function assertHomepageLooksValid(homepagePath: string): Promise<void> {
@@ -565,7 +565,7 @@ async function replaceHugoConfig(
 /**
  * Assert that the generated page contains the expected rendered draft content.
  *
- * @param pageHtml HTML from `public/foo/index.html`.
+ * @param pageHtml HTML from `public/foo/baro.html`.
  */
 function assertDraftPageRendered(pageHtml: string): void {
 	const failures: string[] = [];
@@ -610,7 +610,7 @@ function assertDraftPageRendered(pageHtml: string): void {
  *
  * Locale is checked strictly on the `<html>` tag.
  *
- * @param homepageHtml HTML from `public/index.html`.
+ * @param homepageHtml HTML from `public/baro.html`.
  */
 function assertUpdatedConfigInOutput(homepageHtml: string): void {
 	const failures: string[] = [];
@@ -642,13 +642,13 @@ function assertUpdatedConfigInOutput(homepageHtml: string): void {
  * Assert that the draft page is not part of the production build.
  *
  * @param projectRoot Project root.
- * @param homepagePath Absolute path to `public/index.html`.
+ * @param homepagePath Absolute path to `public/baro.html`.
  */
 async function assertDraftHiddenInProduction(
 	projectRoot: string,
 	homepagePath: string,
 ): Promise<void> {
-	const draftOutputPath = join(projectRoot, "public", "foo", "index.html");
+	const draftOutputPath = join(projectRoot, "public", "foo", "baro.html");
 	await assertFileDoesNotExist(draftOutputPath);
 
 	const homepageHtml = await readTextFile(homepagePath);
@@ -712,7 +712,7 @@ async function runRoutine(options: RoutineOptions): Promise<number> {
 			command: "hugo",
 			args: [],
 			cwd: projectRoot,
-			expectedFiles: ["public/index.html"],
+			expectedFiles: ["public/baro.html"],
 		},
 	];
 
@@ -745,9 +745,9 @@ async function runRoutine(options: RoutineOptions): Promise<number> {
 		}
 
 		const configPath = join(projectRoot, options.configFile);
-		const homepagePath = join(projectRoot, "public/index.html");
+		const homepagePath = join(projectRoot, "public/baro.html");
 		const contentPath = join(projectRoot, "content/foo.md");
-		const draftOutputPath = join(projectRoot, "public", "foo", "index.html");
+		const draftOutputPath = join(projectRoot, "public", "foo", "baro.html");
 
 		console.log("\n[RUN] Strict config assertion");
 		await assertThemeConfigured(configPath, options.themeName);
@@ -792,7 +792,7 @@ async function runRoutine(options: RoutineOptions): Promise<number> {
 			command: "hugo",
 			args: ["--buildDrafts"],
 			cwd: projectRoot,
-			expectedFiles: ["public/index.html", "public/foo/index.html"],
+			expectedFiles: ["public/baro.html", "public/foo/baro.html"],
 		};
 		const draftBuildReport = await executeHugoBuildStep(
 			draftBuildStep,
@@ -828,7 +828,7 @@ async function runRoutine(options: RoutineOptions): Promise<number> {
 			command: "hugo",
 			args: ["--buildDrafts"],
 			cwd: projectRoot,
-			expectedFiles: ["public/index.html", "public/foo/index.html"],
+			expectedFiles: ["public/baro.html", "public/foo/baro.html"],
 		};
 		const configBuildReport = await executeHugoBuildStep(
 			configBuildStep,
@@ -860,7 +860,7 @@ async function runRoutine(options: RoutineOptions): Promise<number> {
 			command: "hugo",
 			args: [],
 			cwd: projectRoot,
-			expectedFiles: ["public/index.html"],
+			expectedFiles: ["public/baro.html"],
 		};
 		const productionBuildReport = await executeHugoBuildStep(
 			productionBuildStep,

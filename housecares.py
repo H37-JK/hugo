@@ -16,6 +16,12 @@ load_dotenv()
 # 구매하신 도메인을 여기에 입력하세요
 YOUR_DOMAIN = "housescares.com"
 
+# 사용할 템플릿: layouts/_default/housecares.html
+LAYOUT = "housecares"
+# 네이버 검색결과에 보일 사이트명 / 대표 이미지(og:image)
+SITE_NAME = "홈케어"
+OG_IMAGE = "/images/housecare/1.jpg"
+
 # Cloudflare Pages 프로젝트명 (대시보드에서 미리 생성해둔 프로젝트명)
 CF_PROJECT_NAME = ""
 
@@ -138,7 +144,9 @@ date: {today_str}
 unique_body: "{unique_body}"
 images: {img_param}
 id: "0"
-layout: "index"
+layout: "{LAYOUT}"
+site_name: "{SITE_NAME}"
+og_image: "{OG_IMAGE}"
 ---
 ''')
         f.write("\n### 📍 추천 서비스 지역\n")
@@ -189,6 +197,9 @@ category: "{category}"
 date: {today_str}
 images: {img_param}
 id: "{counter}"
+layout: "{LAYOUT}"
+site_name: "{SITE_NAME}"
+og_image: "{OG_IMAGE}"
 unique_body: "{unique_body}"
 sink_description: "{sink_desc}"
 sujun_description: "{sujun_desc}"
@@ -251,6 +262,9 @@ category: "{category}"
 date: {today_str}
 images: {img_param}
 id: "{counter}"
+layout: "{LAYOUT}"
+site_name: "{SITE_NAME}"
+og_image: "{OG_IMAGE}"
 unique_body: "{unique_body}"
 sink_description: "{sink_desc}"
 sujun_description: "{sujun_desc}"
@@ -311,6 +325,9 @@ category: "{category}"
 date: {today_str}
 images: {img_param}
 id: "{counter}"
+layout: "{LAYOUT}"
+site_name: "{SITE_NAME}"
+og_image: "{OG_IMAGE}"
 unique_body: "{unique_body}"
 sink_description: "{sink_desc}"
 sujun_description: "{sujun_desc}"
@@ -372,6 +389,9 @@ category: "{category}"
 date: {today_str}
 images: {img_param}
 id: "{counter}"
+layout: "{LAYOUT}"
+site_name: "{SITE_NAME}"
+og_image: "{OG_IMAGE}"
 unique_body: "{unique_body}"
 sink_description: "{sink_desc}"
 sujun_description: "{sujun_desc}"

@@ -8,7 +8,13 @@ import random
 load_dotenv()
 
 your_domain = "ssakddula.com"
-sites = [{"name": "hasu"}, {"name": "semun"}, {"name": "toilet"}]
+# 사용할 템플릿: layouts/_default/ssak.html
+LAYOUT = "ssak2"
+# 네이버 검색결과에 보일 사이트명 / 대표 이미지(og:image)
+SITE_NAME = "싹뚫어"
+OG_IMAGE = "/images/ssak/1.jpg"
+# sites = [{"name": "hasu"}, {"name": "semun"}, {"name": "toilet"}]
+sites = [{"name": "pajus"}]
 categories = [
     {"category": "변기"},
     {"category": "세면대"},
@@ -28,7 +34,7 @@ else:
     regions = ['경기도 파주시']
 
 all_images = [f"/images/{i}.png" for i in range(1, 7)]
-work_images = [f"/images/work/{i}.jpg" for i in range(1, 46)]
+work_images = [f"/images/work/{i}.jpg" for i in range(1, 45)]
 
 service_descriptions = {
     "변기": [
@@ -172,7 +178,9 @@ work_image5: {work_image5}
 work_image6: {work_image6}
 work_image7: {work_image7}
 id: "0"
-layout: "index"
+layout: "{LAYOUT}"
+site_name: "{SITE_NAME}"
+og_image: "{OG_IMAGE}"
 ---
 ''')
 
@@ -242,6 +250,9 @@ date: "{today_str}"
 unique_body: "{body}"
 images: {images}
 id: "{counter}"
+layout: "{LAYOUT}"
+site_name: "{SITE_NAME}"
+og_image: "{OG_IMAGE}"
 sink_description: "{sink_desc}"
 sink_description3: "{sink_desc2}"
 sink_description2: "{sink_desc3}"
@@ -310,8 +321,8 @@ def deploy():
         deploy_to_cloudflare(site_name, content_dir, output_dir)
         cmd_deploy = f"rmdir /s /q {content_dir}"
         subprocess.run(cmd_deploy, shell=True, check=True)
-        cmd_deploy = f"rmdir /s /q {output_dir}"
-        subprocess.run(cmd_deploy, shell=True, check=True)
+        # cmd_deploy = f"rmdir /s /q {output_dir}"
+        # subprocess.run(cmd_deploy, shell=True, check=True)
 
 
 if __name__ == "__main__":

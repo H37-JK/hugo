@@ -8,6 +8,11 @@ import random
 load_dotenv()
 
 your_domain = "barosulbe.com"
+# 사용할 템플릿: layouts/_default/baro.html
+LAYOUT = "baro"
+# 네이버 검색결과에 보일 사이트명 / 대표 이미지(og:image)
+SITE_NAME = "바로설비"
+OG_IMAGE = "/images/baro/1.jpg"
 sites = [{"name": "yoksil"}, {"name": "sujun"}, {"name": "bungi"}]
 categories = [
     {"category": "변기"},
@@ -179,7 +184,9 @@ work_image5: {work_image5}
 work_image6: {work_image6}
 work_image7: {work_image7}
 id: "0"
-layout: "index"
+layout: "{LAYOUT}"
+site_name: "{SITE_NAME}"
+og_image: "{OG_IMAGE}"
 ---
 ''')
 
@@ -258,6 +265,9 @@ unique_body: "{body}"
 images: {images}
 random_title: {random_title}
 id: "{counter}"
+layout: "{LAYOUT}"
+site_name: "{SITE_NAME}"
+og_image: "{OG_IMAGE}"
 sink_description: "{sink_desc}"
 sink_description2: "{sink_desc2}"
 sink_description3: "{sink_desc3}"
