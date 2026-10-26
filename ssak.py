@@ -14,7 +14,7 @@ LAYOUT = "ssak2"
 SITE_NAME = "싹뚫어"
 OG_IMAGE = "/images/ssak/1.jpg"
 # sites = [{"name": "hasu"}, {"name": "semun"}, {"name": "toilet"}]
-sites = [{"name": "pajus"}]
+sites = [{"name": "pajus"},{"name": "ddul"},{"name": "seouls"}]
 categories = [
     {"category": "변기"},
     {"category": "세면대"},
@@ -290,8 +290,8 @@ work_image7: {work_image7}
 ''')
             counter += 1
 
-            with open(file_name, "w", encoding="utf-8") as f:
-                f.write("\n".join(captions))  # \n 은 줄바꿈(엔터)입니다.
+            # with open(file_name, "w", encoding="utf-8") as f:
+            #     f.write("\n".join(captions))  # \n 은 줄바꿈(엔터)입니다.
 
 
 def deploy_to_cloudflare(site_name, content_dir, output_dir):

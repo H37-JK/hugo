@@ -1,0 +1,551 @@
+{{ define "main" }}
+{{ $region := .Params.region }}
+{{ $category := .Params.category }}
+
+<style>
+    html, body { background: #0b1324; }
+    @keyframes ssak-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .ssak-marquee { animation: ssak-marquee 22s linear infinite; }
+    .ssak-grid-bg {
+        background-image: linear-gradient(rgba(148, 163, 184, .06) 1px, transparent 1px),
+                          linear-gradient(90deg, rgba(148, 163, 184, .06) 1px, transparent 1px);
+        background-size: 28px 28px;
+    }
+</style>
+
+<div class="bg-[#0b1324] text-slate-100 min-h-screen">
+
+<!-- 상단 흐르는 공지 바 -->
+<div class="bg-gradient-to-r from-sky-600 via-cyan-500 to-sky-600 text-white text-xs font-bold py-2 overflow-hidden whitespace-nowrap">
+    <div class="ssak-marquee inline-flex gap-10 pr-10">
+        <span>🚨 수도권 30분 이내 긴급 출동</span><span>💸 못 뚫으면 0원</span><span>🛠️ 무상 A/S 원칙</span><span>🌙 24시 심야출동 · 연중무휴</span>
+        <span>🚨 수도권 30분 이내 긴급 출동</span><span>💸 못 뚫으면 0원</span><span>🛠️ 무상 A/S 원칙</span><span>🌙 24시 심야출동 · 연중무휴</span>
+    </div>
+</div>
+
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-[#0b1324]/90 backdrop-blur-md border-b border-slate-700/60">
+    <div class="max-w-3xl mx-auto px-4 h-16 flex items-center justify-between">
+        <span class="flex items-center gap-2.5">
+            <span class="w-10 h-10 rounded-2xl bg-gradient-to-br from-sky-400 to-cyan-300 text-[#0b1324] flex items-center justify-center text-lg shadow-lg shadow-sky-500/30">
+                <i class="fa-solid fa-toilet"></i>
+            </span>
+            <span class="leading-tight">
+                <span class="block text-lg font-black tracking-tight">싹뚫어<span class="text-sky-400">24시</span></span>
+                <span class="block text-[10px] text-slate-400 font-medium">막힘 · 누수 · 교체 전문 설비팀</span>
+            </span>
+        </span>
+        <a href="tel:050713266763" class="flex items-center gap-1.5 bg-sky-500 hover:bg-sky-400 text-white font-bold text-xs px-3.5 py-2.5 rounded-xl shadow-lg shadow-sky-500/30 transition-colors">
+            <i class="fa-solid fa-phone"></i> 긴급 전화연결
+        </a>
+    </div>
+</header>
+
+<div class="max-w-3xl mx-auto pb-28">
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden ssak-grid-bg">
+        <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-[28rem] h-[28rem] bg-sky-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative px-5 pt-8 pb-10">
+            <!-- 실시간 출동 현황 카드 -->
+            <div class="flex items-center gap-3 bg-slate-800/70 border border-slate-700 rounded-2xl px-4 py-3 mb-6 backdrop-blur">
+                <span class="relative flex h-3 w-3 shrink-0">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-400"></span>
+                </span>
+                <p class="text-xs text-slate-300 leading-snug">
+                    <span class="font-bold text-white">{{ $region }}</span> 인근 기사님 대기중<br>
+                    <span class="text-sky-300 font-bold">수도권 30분 이내 긴급 출동</span> 가능
+                </p>
+            </div>
+
+            <h1 class="text-[27px] sm:text-4xl font-black leading-snug tracking-tight text-center">
+                {{ $region }} 지역<br>
+                답답하게 막힌 <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-cyan-200">{{ $category }}</span><br>
+                <span class="inline-block mt-1 bg-amber-400 text-[#0b1324] px-2 rounded-lg">못 뚫으면 0원!</span> 시원하게 해결!
+            </h1>
+
+            <p class="text-sm text-slate-300 text-center leading-relaxed mt-4 mb-6">
+                {{ .Params.description }}
+            </p>
+
+            <div class="grid grid-cols-2 gap-2 mb-7">
+                <a href="tel:050713266763" class="bg-sky-500 hover:bg-sky-400 text-white font-extrabold text-sm py-3.5 rounded-xl text-center shadow-lg shadow-sky-500/30">
+                    <i class="fa-solid fa-phone mr-1"></i> 바로 전화하기
+                </a>
+                <a href="#consult" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-bold text-sm py-3.5 rounded-xl text-center">
+                    <i class="fa-regular fa-pen-to-square mr-1"></i> 온라인 접수
+                </a>
+            </div>
+
+            <!-- 대표 사진 -->
+            <div class="relative">
+                <div class="absolute -inset-1 bg-gradient-to-r from-sky-500 to-cyan-400 rounded-[1.75rem] blur opacity-40"></div>
+                <div class="relative rounded-3xl overflow-hidden border border-slate-600">
+                    <img src="/images/ssak/1.jpg" alt="{{ $region }} {{ $category }} 작업" class="w-full h-auto object-cover">
+                </div>
+                <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-amber-400 text-[#0b1324] text-xs font-black px-4 py-2 rounded-full shadow-xl whitespace-nowrap">
+                    <i class="fa-solid fa-won-sign mr-1"></i> 미해결시 출동비 X
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 핵심 공약 (숫자형 3칸) -->
+    <section class="px-5 pt-8 pb-10">
+        <div class="grid grid-cols-3 rounded-2xl bg-slate-800/60 border border-slate-700 divide-x divide-slate-700">
+            <div class="py-5 text-center">
+                <p class="text-2xl font-black text-sky-300">0<span class="text-base">원</span></p>
+                <p class="text-xs font-bold mt-1">못뚫으면 0원</p>
+                <p class="text-[10px] text-slate-400">미해결시 출동비X</p>
+            </div>
+            <div class="py-5 text-center">
+                <p class="text-2xl font-black text-sky-300">A/S</p>
+                <p class="text-xs font-bold mt-1">A/S 보장</p>
+                <p class="text-[10px] text-slate-400">사후관리 확실</p>
+            </div>
+            <div class="py-5 text-center">
+                <p class="text-2xl font-black text-sky-300">24<span class="text-base">h</span></p>
+                <p class="text-xs font-bold mt-1">24시 심야출동</p>
+                <p class="text-[10px] text-slate-400">연중무휴 대기</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 이용 절차 -->
+    <section class="px-5 pb-10">
+        <p class="text-[11px] font-bold text-sky-400 tracking-[0.2em] text-center">HOW IT WORKS</p>
+        <h2 class="text-xl font-black text-center mt-1 mb-6">{{ $category }}, 이렇게 해결해 드립니다</h2>
+
+        <ol class="relative space-y-4 before:absolute before:left-5 before:top-2 before:bottom-2 before:w-px before:bg-gradient-to-b before:from-sky-400 before:to-slate-700">
+            <li class="relative flex gap-4">
+                <span class="relative z-10 w-10 h-10 rounded-full bg-sky-500 text-white font-black flex items-center justify-center shrink-0 ring-4 ring-[#0b1324]">1</span>
+                <div class="flex-1 bg-slate-800/60 border border-slate-700 rounded-2xl p-4">
+                    <p class="text-sm font-bold">전화 · 카카오톡 · 온라인 접수</p>
+                    <p class="text-xs text-slate-400 mt-1">접수해주시면 담당 기사님이 확인 즉시 전화 드립니다.</p>
+                </div>
+            </li>
+            <li class="relative flex gap-4">
+                <span class="relative z-10 w-10 h-10 rounded-full bg-sky-500 text-white font-black flex items-center justify-center shrink-0 ring-4 ring-[#0b1324]">2</span>
+                <div class="flex-1 bg-slate-800/60 border border-slate-700 rounded-2xl p-4">
+                    <p class="text-sm font-bold">{{ $region }} 긴급 출동</p>
+                    <p class="text-xs text-slate-400 mt-1">수도권 30분 이내, 24시 심야에도 출동합니다.</p>
+                </div>
+            </li>
+            <li class="relative flex gap-4">
+                <span class="relative z-10 w-10 h-10 rounded-full bg-amber-400 text-[#0b1324] font-black flex items-center justify-center shrink-0 ring-4 ring-[#0b1324]">3</span>
+                <div class="flex-1 bg-slate-800/60 border border-amber-400/40 rounded-2xl p-4">
+                    <p class="text-sm font-bold">{{ $category }} 해결 · 못 뚫으면 0원</p>
+                    <p class="text-xs text-slate-400 mt-1">작업 비용만 정직하게 안내하고, 재발시 무상 A/S를 원칙으로 합니다.</p>
+                </div>
+            </li>
+        </ol>
+    </section>
+
+    <!-- 전문 서비스 (탭 전환) -->
+    <section class="bg-slate-800/40 border-y border-slate-700/60 px-5 py-10">
+        <p class="text-[11px] font-bold text-sky-400 tracking-[0.2em] text-center">SERVICE</p>
+        <h2 class="text-xl font-black text-center mt-1">{{ $region }} {{ $category }} 전문 해결 분야</h2>
+        <p class="text-xs text-slate-400 text-center mt-1 mb-6">{{ $category }} 어떤 문제든 전문 장비로 완벽 해결합니다.</p>
+
+        <div class="grid grid-cols-3 gap-1 bg-slate-900 p-1 rounded-xl mb-4" role="tablist">
+            <button type="button" data-ssak-tab="1" class="ssak-tab py-2.5 rounded-lg text-xs font-bold bg-sky-500 text-white">막힘 / 이물질</button>
+            <button type="button" data-ssak-tab="2" class="ssak-tab py-2.5 rounded-lg text-xs font-bold text-slate-400">부속 / 교체</button>
+            <button type="button" data-ssak-tab="3" class="ssak-tab py-2.5 rounded-lg text-xs font-bold text-slate-400">뚫음 해결</button>
+        </div>
+
+        <!-- 탭 1 -->
+        <div data-ssak-panel="1" class="ssak-panel rounded-2xl overflow-hidden bg-slate-900 border border-slate-700">
+            <img src="{{ .Params.work_image1 }}" alt="{{ $region }} {{ $category }} 막힘 작업" class="w-full aspect-video object-cover">
+            <div class="p-5">
+                <h3 class="font-black text-base">{{ $region }} {{ $category }} 막힘 / 이물질 제거</h3>
+                <ul class="mt-3 space-y-2">
+                    {{ with .Params.sink_description }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.sujun_description }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.byeongi_description }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.semyondae_description }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.baegwan_description }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.hasu_desc }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.hwajang_Desc }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                </ul>
+            </div>
+        </div>
+
+        <!-- 탭 2 -->
+        <div data-ssak-panel="2" class="ssak-panel hidden rounded-2xl overflow-hidden bg-slate-900 border border-slate-700">
+            <img src="{{ .Params.work_image2 }}" alt="{{ $region }} {{ $category }} 교체 작업" class="w-full aspect-video object-cover">
+            <div class="p-5">
+                <h3 class="font-black text-base">{{ $region }} {{ $category }} 부속품 교체 / {{ $category }} 교체</h3>
+                <ul class="mt-3 space-y-2">
+                    {{ with .Params.sink_description2 }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.sujun_description2 }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.byeongi_description2 }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.semyondae_description2 }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.baegwan_description2 }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.hasu_desc2 }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.hwajang_Desc2 }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                </ul>
+            </div>
+        </div>
+
+        <!-- 탭 3 -->
+        <div data-ssak-panel="3" class="ssak-panel hidden rounded-2xl overflow-hidden bg-slate-900 border border-slate-700">
+            <img src="{{ .Params.work_image3 }}" alt="{{ $region }} {{ $category }} 뚫음 작업" class="w-full aspect-video object-cover">
+            <div class="p-5">
+                <h3 class="font-black text-base">{{ $region }} {{ $category }} 뚫음 문제 해결</h3>
+                <ul class="mt-3 space-y-2">
+                    {{ with .Params.sink_description3 }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.sujun_description3 }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.byeongi_description3 }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.semyondae_description3 }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.baegwan_description3 }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.hasu_desc3 }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                    {{ with .Params.hwajang_Desc3 }}<li class="flex gap-2 text-sm text-slate-300"><i class="fa-solid fa-circle-check text-sky-400 mt-1"></i><span>{{ . }}</span></li>{{ end }}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 작업 갤러리 -->
+    <section class="px-5 py-10">
+        <p class="text-[11px] font-bold text-sky-400 tracking-[0.2em] text-center">GALLERY</p>
+        <h2 class="text-xl font-black text-center mt-1">{{ $region }} {{ $category }} 현장 작업 갤러리</h2>
+        <p class="text-xs text-slate-400 text-center mt-1 mb-6">{{ $category }} 문제로 최근에 해결해드린 실제 작업 현장입니다.</p>
+
+        <div class="grid grid-cols-2 gap-3">
+            <figure class="relative rounded-2xl overflow-hidden border border-slate-700 aspect-square group">
+                <img src="{{ .Params.work_image4 }}" alt="{{ $region }} {{ $category }} 현장 사진 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <figcaption class="absolute top-2 left-2 bg-[#0b1324]/80 text-sky-300 text-[10px] font-bold px-2 py-1 rounded-md">현장 01</figcaption>
+            </figure>
+            <figure class="relative rounded-2xl overflow-hidden border border-slate-700 aspect-square group">
+                <img src="{{ .Params.work_image5 }}" alt="{{ $region }} {{ $category }} 현장 사진 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <figcaption class="absolute top-2 left-2 bg-[#0b1324]/80 text-sky-300 text-[10px] font-bold px-2 py-1 rounded-md">현장 02</figcaption>
+            </figure>
+            <figure class="relative rounded-2xl overflow-hidden border border-slate-700 aspect-square group">
+                <img src="{{ .Params.work_image6 }}" alt="{{ $region }} {{ $category }} 현장 사진 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <figcaption class="absolute top-2 left-2 bg-[#0b1324]/80 text-sky-300 text-[10px] font-bold px-2 py-1 rounded-md">현장 03</figcaption>
+            </figure>
+            <figure class="relative rounded-2xl overflow-hidden border border-slate-700 aspect-square group">
+                <img src="{{ .Params.work_image7 }}" alt="{{ $region }} {{ $category }} 현장 사진 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <figcaption class="absolute top-2 left-2 bg-[#0b1324]/80 text-sky-300 text-[10px] font-bold px-2 py-1 rounded-md">현장 04</figcaption>
+            </figure>
+        </div>
+
+        <!-- 블로그 / 플레이스 -->
+        <div class="mt-6 rounded-2xl bg-gradient-to-r from-[#03C75A]/20 to-transparent border border-[#03C75A]/30 p-4">
+            <p class="text-xs font-bold text-[#4ade80] mb-3"><i class="fa-solid fa-circle-info mr-1"></i> 더 많은 시공 사례가 궁금하다면</p>
+            <div class="grid grid-cols-2 gap-2">
+                <a href="https://blog.naver.com/hobath0102" target="_blank" class="bg-slate-900/80 hover:bg-slate-900 rounded-xl p-3">
+                    <h4 class="text-xs font-bold leading-snug">{{ $region }} {{ $category }} 해결 사례</h4>
+                    <p class="text-[11px] text-slate-400 mt-1">공식 블로그에서 자세히 보기 →</p>
+                </a>
+                <a href="https://map.naver.com/p/search/0507%201326%206763/place/1163724693?c=15.00,0,0,0,dh&isCorrectAnswer=true&placePath=/home?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202606041226&locale=ko&svcName=map_pcv5&searchText=0507%201326%206763" target="_blank" class="bg-slate-900/80 hover:bg-slate-900 rounded-xl p-3">
+                    <h4 class="text-xs font-bold leading-snug">{{ $region }} {{ $category }} 전문 업체</h4>
+                    <p class="text-[11px] text-slate-400 mt-1">전문 업체 확인 →</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="px-5 pb-10">
+        <p class="text-[11px] font-bold text-sky-400 tracking-[0.2em] text-center">FAQ</p>
+        <h2 class="text-xl font-black text-center mt-1">{{ $region }} 고객님 자주 묻는 질문</h2>
+        <p class="text-xs text-slate-400 text-center mt-1 mb-6">{{ $category }} 서비스 이용 전 확인해보세요.</p>
+
+        <div class="space-y-3">
+            <details class="group bg-slate-800/60 border border-slate-700 rounded-2xl open:bg-slate-800 [&_summary::-webkit-details-marker]:hidden" open>
+                <summary class="flex items-center gap-3 p-4 cursor-pointer select-none">
+                    <span class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-300 text-xs font-black flex items-center justify-center shrink-0">Q1</span>
+                    <span class="flex-1 text-sm font-bold">{{ $region }} 지역은 출장 비용이 따로 있을까요??</span>
+                    <i class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="px-4 pb-4 pl-14 text-sm text-slate-300 leading-relaxed">
+                    저희는 <strong class="text-white">{{ $region }}</strong> 인근에 상시 기사님이 대기중 입니다. 별도의 출장비를 청구하지 않습니다. 오직 작업 비용만 정직하게 안내해 드립니다.
+                </p>
+            </details>
+
+            <details class="group bg-slate-800/60 border border-slate-700 rounded-2xl open:bg-slate-800 [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex items-center gap-3 p-4 cursor-pointer select-none">
+                    <span class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-300 text-xs font-black flex items-center justify-center shrink-0">Q2</span>
+                    <span class="flex-1 text-sm font-bold">{{ $region }} 지역 {{ $category }} 작업 후 같은 곳이 또 막히면?</span>
+                    <i class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="px-4 pb-4 pl-14 text-sm text-slate-300 leading-relaxed">
+                    {{ $category }} 작업 후 동일한 문제로 재발할 경우, 일정 기간 내에 <strong class="text-sky-300">무상 A/S를 원칙</strong>으로 하고 있습니다.
+                </p>
+            </details>
+
+            <details class="group bg-slate-800/60 border border-slate-700 rounded-2xl open:bg-slate-800 [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex items-center gap-3 p-4 cursor-pointer select-none">
+                    <span class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-300 text-xs font-black flex items-center justify-center shrink-0">Q3</span>
+                    <span class="flex-1 text-sm font-bold">카드 결제나 세금계산서, 현금영수증 발행이 가능한가요?</span>
+                    <i class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="px-4 pb-4 pl-14 text-sm text-slate-300 leading-relaxed">
+                    {{ $category }} 모든 작업 비용은 <strong class="text-white">현장 카드 결제, 계좌이체 및 현금영수증 발행</strong>이 가능합니다. 법인 및 사업자 고객님들을 위한 세금계산서 발행도 가능합니다.
+                </p>
+            </details>
+        </div>
+    </section>
+
+    <!-- 상담 및 출동 신청 폼 -->
+    <section id="consult" class="px-5 pb-10">
+        <div class="rounded-3xl overflow-hidden border border-sky-500/40 shadow-2xl shadow-sky-900/40">
+            <div class="relative bg-gradient-to-br from-sky-600 to-cyan-500 px-5 py-6 overflow-hidden">
+                <i class="fa-solid fa-headset absolute -right-3 -bottom-4 text-8xl text-white/15"></i>
+                <span class="inline-block text-[11px] font-black bg-[#0b1324] text-sky-300 px-2.5 py-1 rounded-full">빠른 간편 접수</span>
+                <h2 class="text-2xl font-black text-white mt-2">긴급 출동 &amp; 견적 문의</h2>
+                <p class="text-xs text-sky-50 mt-1">접수해주시면 담당 기사님이 확인 즉시 전화 드립니다.</p>
+            </div>
+
+            <form id="contact-form" action="https://formspree.io/f/xykaagko" method="POST" class="bg-slate-800/80 p-5 space-y-4">
+                <input type="hidden" name="form-name" value="contact" />
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="name" class="block text-xs font-bold text-slate-300 mb-1.5">성함 / 닉네임<span class="text-amber-400 pl-0.5">*</span></label>
+                        <input id="name" name="name" type="text" required placeholder="예: 홍길동" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-600 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/30">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-xs font-bold text-slate-300 mb-1.5">연락처<span class="text-amber-400 pl-0.5">*</span></label>
+                        <input id="phone" name="phone" type="tel" required placeholder="010-0000-0000" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-600 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/30">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="sido" class="block text-xs font-bold text-slate-300 mb-1.5">주소<span class="text-amber-400 pl-0.5">*</span></label>
+                    <div class="grid grid-cols-2 gap-2 mb-2">
+                        <select id="sido" name="sido" onchange="updateSigungu()" class="w-full px-3 py-3 rounded-xl bg-slate-900 border border-slate-600 text-sm text-white focus:outline-none focus:border-sky-400">
+                            <option value="">시/도</option>
+                            <option value="서울특별시">서울특별시</option>
+                            <option value="경기도">경기도</option>
+                            <option value="인천광역시">인천광역시</option>
+                            <option value="전라북도">전라북도</option>
+                            <option value="전라남도">전라남도</option>
+                            <option value="강원도">강원도</option>
+                            <option value="충청북도">충청북도</option>
+                            <option value="충청남도">충청남도</option>
+                            <option value="경상북도">경상북도</option>
+                            <option value="경상남도">경상남도</option>
+                            <option value="울산광역시">울산광역시</option>
+                            <option value="부산광역시">부산광역시</option>
+                            <option value="대구광역시">대구광역시</option>
+                            <option value="제주특별자치도">제주특별자치도</option>
+                        </select>
+                        <select id="sigungu" name="sigungu" class="w-full px-3 py-3 rounded-xl bg-slate-900 border border-slate-600 text-sm text-white focus:outline-none focus:border-sky-400">
+                            <option value="">시/군/구</option>
+                        </select>
+                    </div>
+                    <input id="detail-address" name="detail-address" type="text" placeholder="상세주소를 입력해주세요" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-600 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/30">
+                </div>
+
+                <div>
+                    <label for="message" class="block text-xs font-bold text-slate-300 mb-1.5">문의내용<span class="text-amber-400 pl-0.5">*</span></label>
+                    <textarea id="message" name="message" rows="4" placeholder="상담 받으실 내용을 간단히 적어주세요." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-600 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/30"></textarea>
+                </div>
+
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" required checked class="w-4 h-4 accent-sky-500">
+                    <span class="text-[11px] text-slate-400">개인정보 수집 및 이용에 동의합니다.</span>
+                </label>
+
+                <button type="submit" class="w-full bg-amber-400 hover:bg-amber-300 text-[#0b1324] font-black py-4 rounded-xl text-base transition-colors shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-paper-plane mr-1"></i> 상담 접수하기
+                </button>
+                <p id="form-status" class="hidden text-center text-sm font-bold"></p>
+            </form>
+        </div>
+    </section>
+
+    {{ $sites := slice "pajus" "seouls" "ddul" }}
+    {{ $targetSite := index (shuffle $sites) 0 }}
+    {{ $baseURL := printf "https://%s.ssakddula.com" $targetSite }}
+
+    <!-- 페이지 이동 -->
+    <nav class="flex flex-wrap justify-center items-center gap-1.5 mb-8 px-5 py-2">
+        {{ $currentID := int .Params.id }}
+        {{ $maxPages := 20000 }}
+
+        {{ if eq $currentID 0 }}{{ $currentID = 1 }}{{ end }}
+
+        {{ $start := (sub $currentID 5) }}
+        {{ $end := (add $currentID 5) }}
+
+        {{ if lt $start 1 }}{{ $start = 1 }}{{ end }}
+        {{ if gt $end $maxPages }}{{ $end = $maxPages }}{{ end }}
+
+        {{ range seq $start $end }}
+        {{ $isCurrent := eq (int .) (int $currentID) }}
+        <a href="{{ printf "%s/%d/" $baseURL . }}"
+           class="flex items-center justify-center min-w-[36px] h-9 px-2 rounded-lg text-sm font-bold border transition-colors
+               {{ if $isCurrent }}bg-sky-500 border-sky-500 text-white{{ else }}bg-slate-800 border-slate-700 text-slate-400 hover:text-sky-300{{ end }}">
+            {{ . }}
+        </a>
+        {{ end }}
+    </nav>
+
+    <footer class="mx-5 border-t border-slate-700/60 pt-6 pb-6 text-center text-slate-500 text-xs leading-relaxed">
+        <p class="font-bold text-slate-300 mb-1">싹뚫어24시</p>
+        <p>대표번호 0507-1326-6763</p>
+        <p class="mt-2">© 2026 싹뚫어24시 | 본 사이트는 {{ $region }} {{ $category }} 전문 업체 안내 페이지입니다.</p>
+    </footer>
+</div>
+
+<!-- 하단 고정 바 -->
+<div class="fixed bottom-0 inset-x-0 z-50 bg-[#0b1324]/95 backdrop-blur border-t border-slate-700 p-2.5">
+    <div class="max-w-3xl mx-auto flex gap-2">
+        <a href="https://open.kakao.com/o/sHNNi3Fi" target="_blank" rel="noopener noreferrer" class="flex-1 bg-[#FEE500] hover:bg-[#FADA0A] text-[#191919] font-bold text-xs py-3.5 rounded-xl flex items-center justify-center gap-1.5">
+            <svg class="w-4 h-4 fill-[#191919]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.97 0-9 3.185-9 7.11 0 2.51 1.64 4.72 4.14 5.91-.18.66-.66 2.41-.76 2.79-.12.48.18.47.38.34.16-.11 2.6-1.76 3.65-2.47.51.08 1.04.13 1.59.13 4.97 0 9-3.185 9-7.11S16.97 3 12 3z"/></svg>
+            카카오톡 접수
+        </a>
+        <a href="tel:050713266763" class="flex-[2] bg-sky-500 hover:bg-sky-400 text-white font-extrabold text-sm py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-sky-500/30">
+            <i class="fa-solid fa-phone animate-bounce"></i> 지금 바로 전화 연결
+        </a>
+    </div>
+</div>
+
+<!-- 플로팅 버튼 -->
+<div class="fixed bottom-20 right-4 z-50 flex flex-col gap-3">
+    <a href="tel:050713266763" class="relative flex items-center justify-center w-14 h-14 bg-sky-500 text-white rounded-full shadow-xl shadow-sky-500/40" title="전화 상담">
+        <span class="absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-60 animate-ping"></span>
+        <i class="relative fa-solid fa-phone text-xl"></i>
+    </a>
+    <a href="https://open.kakao.com/o/sHNNi3Fi" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center w-14 h-14 bg-[#FEE500] rounded-full shadow-xl hover:-translate-y-1 transition-transform" title="카카오톡 오픈채팅 문의">
+        <svg class="w-7 h-7 fill-[#191919]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.97 0-9 3.185-9 7.11 0 2.51 1.64 4.72 4.14 5.91-.18.66-.66 2.41-.76 2.79-.12.48.18.47.38.34.16-.11 2.6-1.76 3.65-2.47.51.08 1.04.13 1.59.13 4.97 0 9-3.185 9-7.11S16.97 3 12 3z"/></svg>
+    </a>
+</div>
+
+</div>
+
+<script>
+    // 서비스 탭 전환
+    document.querySelectorAll(".ssak-tab").forEach(function (tab) {
+        tab.addEventListener("click", function () {
+            const id = tab.getAttribute("data-ssak-tab");
+            document.querySelectorAll(".ssak-tab").forEach(function (t) {
+                const active = t === tab;
+                t.classList.toggle("bg-sky-500", active);
+                t.classList.toggle("text-white", active);
+                t.classList.toggle("text-slate-400", !active);
+            });
+            document.querySelectorAll(".ssak-panel").forEach(function (p) {
+                p.classList.toggle("hidden", p.getAttribute("data-ssak-panel") !== id);
+            });
+        });
+    });
+
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const status = document.getElementById("form-status");
+        const showStatus = function (msg, ok) {
+            status.textContent = msg;
+            status.className = "text-center text-sm font-bold " + (ok ? "text-emerald-400" : "text-rose-400");
+        };
+
+        fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    showStatus("상담 신청이 정상적으로 접수되었습니다. 곧 연락드리겠습니다!", true);
+                    form.reset();
+                } else {
+                    showStatus("전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.", false);
+                }
+            })
+            .catch(function () {
+                showStatus("전송 중 오류가 발생했습니다.", false);
+            });
+    });
+
+    const areaData = {
+        "서울특별시": [
+            "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구",
+            "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구",
+            "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"
+        ],
+        "부산광역시": [
+            "강서구", "금정구", "기장군", "남구", "동구", "동래구", "부산진구", "북구",
+            "사상구", "사하구", "서구", "수영구", "연제구", "영도구", "중구", "해운대구"
+        ],
+        "인천광역시": [
+            "강화군", "계양구", "남구", "남동구", "동구", "부평구", "서구", "연수구", "옹진군", "중구"
+        ],
+        "대구광역시": [
+            "중구", "동구", "서구", "남구", "북구", "수성구", "달서구", "달성군"
+        ],
+        "광주광역시": [
+            "동구", "서구", "남구", "북구", "광산구"
+        ],
+        "대전광역시": [
+            "동구", "중구", "서구", "유성구", "대덕구"
+        ],
+        "울산광역시": [
+            "중구", "남구", "동구", "북구", "울주군"
+        ],
+        "경기도": [
+            "가평군", "고양시", "과천시", "광명시", "광주시", "구리시", "군포시", "김포시",
+            "남양주시", "동두천시", "부천시", "성남시", "수원시", "시흥시", "안산시", "안성시",
+            "안양시", "양주시", "양평군", "여주시", "연천군", "오산시", "용인시", "의왕시",
+            "의정부시", "이천시", "파주시", "평택시", "포천시", "하남시", "화성시"
+        ],
+        "강원도": [
+            "원주시", "춘천시", "강릉시", "동해시", "속초시", "삼척시", "홍천군", "태백시",
+            "철원군", "횡성군", "평창군", "영월군", "정선군", "인제군", "고성군", "양양군",
+            "화천군", "양구군"
+        ],
+        "충청북도": [
+            "청주시", "충주시", "제천시", "보은군", "옥천군", "영동군", "증평군", "진천군",
+            "괴산군", "음성군", "단양군"
+        ],
+        "충청남도": [
+            "천안시", "공주시", "보령시", "아산시", "서산시", "논산시", "계룡시", "당진시",
+            "금산군", "부여군", "서천군", "청양군", "홍성군", "예산군", "태안군"
+        ],
+        "경상북도": [
+            "포항시", "경주시", "김천시", "안동시", "구미시", "영주시", "영천시", "상주시",
+            "문경시", "경산시", "군위군", "의성군", "청송군", "영양군", "영덕군", "청도군",
+            "고령군", "성주군", "칠곡군", "예천군", "봉화군", "울진군", "울릉군"
+        ],
+        "경상남도": [
+            "창원시", "김해시", "진주시", "양산시", "거제시", "통영시", "사천시", "밀양시",
+            "함안군", "거창군", "창녕군", "고성군", "하동군", "합천군", "남해군", "함양군",
+            "산청군", "의령군"
+        ],
+        "전라북도": [
+            "전주시", "익산시", "군산시", "정읍시", "완주군", "김제시", "남원시", "고창군",
+            "부안군", "임실군", "순창군", "진안군", "장수군", "무주군"
+        ],
+        "전라남도": [
+            "여수시", "순천시", "목포시", "광양시", "나주시", "무안군", "해남군", "고흥군",
+            "화순군", "영암군", "영광군", "완도군", "담양군", "장성군", "보성군", "신안군",
+            "장흥군", "강진군", "함평군", "진도군", "곡성군", "구례군"
+        ],
+        "제주특별자치도": [
+            "제주시", "서귀포시"
+        ]
+    };
+
+    function updateSigungu() {
+        const sigunguSelect = document.getElementById("sigungu");
+        const selectedSido = document.getElementById("sido").value;
+
+        sigunguSelect.innerHTML = '<option value="">시/군/구 선택</option>';
+
+        if (selectedSido && areaData[selectedSido]) {
+            areaData[selectedSido].forEach(function (city) {
+                const option = document.createElement("option");
+                option.value = city;
+                option.text = city;
+                sigunguSelect.add(option);
+            });
+        }
+    }
+</script>
+{{ end }}
