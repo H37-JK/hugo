@@ -453,6 +453,7 @@
         })
             .then(function (response) {
                 if (response.ok) {
+                    alert('상담 신청이 정상적으로 접수되었습니다. 곧 연락드리겠습니다!')
                     showStatus("상담 신청이 정상적으로 접수되었습니다. 곧 연락드리겠습니다!", true);
                     form.reset();
                 } else {

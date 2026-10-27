@@ -1,0 +1,470 @@
+{{ define "main" }}
+{{ $region := .Params.region }}
+{{ $category := .Params.category }}
+
+<style>
+    html, body { background: #0c1424; }
+    .hc-dots-bg {
+        background-image: radial-gradient(rgba(148, 163, 184, .12) 1px, transparent 1px);
+        background-size: 18px 18px;
+    }
+</style>
+
+<div class="bg-[#0c1424] text-slate-100 min-h-screen">
+
+<!-- 상단 안내 바 -->
+<div class="bg-teal-500 text-[#0c1424] text-[11px] font-extrabold text-center py-2 px-4">
+    <i class="fa-solid fa-house-chimney mr-1"></i> 변기 · 세면대 · 수전 교체 수리 전국 24시 전문 상담
+</div>
+
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-[#0c1424]/90 backdrop-blur-md border-b border-slate-700/60">
+    <div class="max-w-3xl mx-auto px-4 h-16 flex items-center justify-between">
+        <span class="flex items-center gap-2.5">
+            <span class="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-emerald-300 text-[#0c1424] flex items-center justify-center text-lg shadow-lg shadow-teal-500/30">
+                <i class="fa-solid fa-house"></i>
+            </span>
+            <span class="leading-tight">
+                <span class="block text-lg font-black tracking-tight">홈케어</span>
+                <span class="block text-[10px] text-slate-400 font-medium">우리집 설비 지역 전문 서비스</span>
+            </span>
+        </span>
+        <a href="tel:050713266763" class="flex items-center gap-1.5 bg-teal-400 hover:bg-teal-300 text-[#0c1424] font-extrabold text-xs px-3.5 py-2.5 rounded-full shadow-lg shadow-teal-500/30 transition-colors">
+            <i class="fa-solid fa-phone"></i> 전화 상담
+        </a>
+    </div>
+</header>
+
+<div class="max-w-3xl mx-auto pb-28">
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden hc-dots-bg">
+        <div class="absolute -top-16 -right-20 w-80 h-80 bg-teal-400/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-64 -left-24 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative px-5 pt-8 pb-10">
+            <p class="inline-flex items-center gap-1.5 text-[11px] font-bold text-teal-300 bg-teal-400/10 border border-teal-400/30 px-3 py-1.5 rounded-full mb-4">
+                <i class="fa-solid fa-location-dot"></i> {{ $region }}
+            </p>
+
+            <h1 class="text-[26px] sm:text-4xl font-black leading-snug tracking-tight">
+                {{ .Params.title }}
+            </h1>
+
+            <p class="text-sm text-slate-300 leading-relaxed mt-4">
+                {{ .Params.description }}
+            </p>
+
+            <!-- 대표 사진 + 전화 카드 -->
+            <div class="mt-7 rounded-3xl overflow-hidden border border-slate-600 bg-slate-800/60 shadow-2xl shadow-black/40">
+                <img src="/images/1.jpg" alt="{{ $region }} {{ $category }} 전문가 출동 서비스" class="w-full h-auto object-cover">
+                <a href="tel:050713266763" class="flex items-center justify-between gap-3 px-5 py-4 bg-gradient-to-r from-teal-500 to-emerald-400 text-[#0c1424]">
+                    <span>
+                        <span class="block text-[11px] font-bold opacity-80">{{ $region }} 지역 상담 및 견적 문의</span>
+                        <span class="block text-2xl font-black tracking-tight">0507-1326-6763</span>
+                    </span>
+                    <span class="w-12 h-12 rounded-full bg-[#0c1424] text-teal-300 flex items-center justify-center text-lg shrink-0">
+                        <i class="fa-solid fa-phone"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 블로그 / 플레이스 -->
+    <section class="px-5 pb-10 grid grid-cols-2 gap-3">
+        <a href="https://blog.naver.com/hobath0102" target="_blank" class="rounded-2xl bg-slate-800/60 border border-slate-700 hover:border-teal-400/60 p-4 transition-colors">
+            <span class="w-10 h-10 rounded-xl bg-indigo-500/20 text-xl flex items-center justify-center">📝</span>
+            <h4 class="text-sm font-bold mt-3 leading-snug">{{ $region }} {{ $category }} 해결 사례</h4>
+            <p class="text-[11px] text-slate-400 mt-1">공식 블로그에서 자세히 보기 →</p>
+        </a>
+        <a href="https://map.naver.com/p/search/0507%201326%206763/place/1163724693?c=15.00,0,0,0,dh&isCorrectAnswer=true&placePath=/home?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202606041226&locale=ko&svcName=map_pcv5&searchText=0507%201326%206763" target="_blank" class="rounded-2xl bg-slate-800/60 border border-slate-700 hover:border-teal-400/60 p-4 transition-colors">
+            <span class="w-10 h-10 rounded-xl bg-emerald-500/20 text-xl flex items-center justify-center">📞</span>
+            <h4 class="text-sm font-bold mt-3 leading-snug">{{ $region }} {{ $category }} 전문 업체</h4>
+            <p class="text-[11px] text-slate-400 mt-1">전문 업체 확인 →</p>
+        </a>
+    </section>
+
+    <!-- 전문 진단 -->
+    <section class="bg-slate-800/40 border-y border-slate-700/60 px-5 py-10">
+        <p class="text-[11px] font-bold text-teal-300 tracking-[0.2em]">DIAGNOSIS</p>
+        <h2 class="text-xl font-black mt-1 flex items-center gap-2">
+            <i class="fa-solid fa-stethoscope text-teal-300"></i> {{ $region }} {{ $category }} 전문 진단
+        </h2>
+
+        <div class="mt-5 rounded-2xl bg-[#0c1424] border border-slate-700 p-5">
+            <div class="text-sm text-slate-200 leading-relaxed whitespace-pre-line">{{ .Params.unique_body | safeHTML }}</div>
+        </div>
+
+        <ul class="mt-4 space-y-2.5">
+            {{ with .Params.sink_description }}<li class="flex gap-3 rounded-2xl bg-slate-900/70 border border-slate-700 p-4"><span class="w-9 h-9 rounded-xl bg-sky-400/15 text-sky-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-sink"></i></span><p class="text-sm text-slate-300 leading-relaxed"><strong class="block text-white text-xs mb-0.5">싱크대</strong>{{ $region }}지역 {{ . }}</p></li>{{ end }}
+            {{ with .Params.sujun_description }}<li class="flex gap-3 rounded-2xl bg-slate-900/70 border border-slate-700 p-4"><span class="w-9 h-9 rounded-xl bg-emerald-400/15 text-emerald-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-faucet"></i></span><p class="text-sm text-slate-300 leading-relaxed"><strong class="block text-white text-xs mb-0.5">수전</strong>{{ $region }}지역 {{ . }}</p></li>{{ end }}
+            {{ with .Params.byeongi_description }}<li class="flex gap-3 rounded-2xl bg-slate-900/70 border border-slate-700 p-4"><span class="w-9 h-9 rounded-xl bg-amber-400/15 text-amber-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-toilet"></i></span><p class="text-sm text-slate-300 leading-relaxed"><strong class="block text-white text-xs mb-0.5">변기</strong>{{ $region }}지역 {{ . }}</p></li>{{ end }}
+            {{ with .Params.semyondae_description }}<li class="flex gap-3 rounded-2xl bg-slate-900/70 border border-slate-700 p-4"><span class="w-9 h-9 rounded-xl bg-violet-400/15 text-violet-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-hands-bubbles"></i></span><p class="text-sm text-slate-300 leading-relaxed"><strong class="block text-white text-xs mb-0.5">세면대</strong>{{ $region }}지역 {{ . }}</p></li>{{ end }}
+            {{ with .Params.baegwan_description }}<li class="flex gap-3 rounded-2xl bg-slate-900/70 border border-slate-700 p-4"><span class="w-9 h-9 rounded-xl bg-rose-400/15 text-rose-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-wrench"></i></span><p class="text-sm text-slate-300 leading-relaxed"><strong class="block text-white text-xs mb-0.5">배관</strong>{{ $region }}지역 {{ . }}</p></li>{{ end }}
+            {{ with .Params.hasu_desc }}<li class="flex gap-3 rounded-2xl bg-slate-900/70 border border-slate-700 p-4"><span class="w-9 h-9 rounded-xl bg-cyan-400/15 text-cyan-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-water"></i></span><p class="text-sm text-slate-300 leading-relaxed"><strong class="block text-white text-xs mb-0.5">하수구</strong>{{ $region }}지역 {{ . }}</p></li>{{ end }}
+            {{ with .Params.hwajang_Desc }}<li class="flex gap-3 rounded-2xl bg-slate-900/70 border border-slate-700 p-4"><span class="w-9 h-9 rounded-xl bg-indigo-400/15 text-indigo-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-restroom"></i></span><p class="text-sm text-slate-300 leading-relaxed"><strong class="block text-white text-xs mb-0.5">화장실</strong>{{ $region }}지역 {{ . }}</p></li>{{ end }}
+        </ul>
+    </section>
+
+    <!-- 상담 신청 폼 -->
+    <section id="consult" class="px-5 py-10">
+        <div class="rounded-3xl bg-slate-800/70 border border-slate-700 overflow-hidden">
+            <div class="flex items-center gap-4 px-5 py-5 border-b border-slate-700 bg-gradient-to-r from-indigo-500/20 to-teal-400/10">
+                <span class="w-12 h-12 rounded-2xl bg-teal-400 text-[#0c1424] flex items-center justify-center text-xl shrink-0">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                </span>
+                <div>
+                    <h2 class="text-lg font-black">빠른 상담 예약</h2>
+                    <p class="text-xs text-slate-400">상담 내용을 남겨주시면 확인 후 즉시 연락드리겠습니다.</p>
+                </div>
+            </div>
+
+            <form id="contact-form" action="https://formspree.io/f/xykaagko" method="POST" class="p-5 space-y-4">
+                <input type="hidden" name="form-name" value="contact" />
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="name" class="block text-xs font-bold text-slate-300 mb-1.5">성함<span class="text-rose-400 pl-0.5">*</span></label>
+                        <input id="name" name="name" type="text" required placeholder="성함을 입력해 주세요." class="w-full px-4 py-3 rounded-xl bg-[#0c1424] border border-slate-600 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-xs font-bold text-slate-300 mb-1.5">연락처<span class="text-rose-400 pl-0.5">*</span></label>
+                        <input id="phone" name="phone" type="tel" required placeholder="010-0000-0000" class="w-full px-4 py-3 rounded-xl bg-[#0c1424] border border-slate-600 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="sido" class="block text-xs font-bold text-slate-300 mb-1.5">주소<span class="text-rose-400 pl-0.5">*</span></label>
+                    <div class="grid grid-cols-2 gap-2 mb-2">
+                        <select id="sido" name="sido" onchange="updateSigungu()" class="w-full px-3 py-3 rounded-xl bg-[#0c1424] border border-slate-600 text-sm text-white focus:outline-none focus:border-teal-400">
+                            <option value="">시/도</option>
+                            <option value="서울특별시">서울특별시</option>
+                            <option value="경기도">경기도</option>
+                            <option value="인천광역시">인천광역시</option>
+                            <option value="전라북도">전라북도</option>
+                            <option value="전라남도">전라남도</option>
+                            <option value="강원도">강원도</option>
+                            <option value="충청북도">충청북도</option>
+                            <option value="충청남도">충청남도</option>
+                            <option value="경상북도">경상북도</option>
+                            <option value="경상남도">경상남도</option>
+                            <option value="울산광역시">울산광역시</option>
+                            <option value="부산광역시">부산광역시</option>
+                            <option value="대구광역시">대구광역시</option>
+                            <option value="제주특별자치도">제주특별자치도</option>
+                        </select>
+                        <select id="sigungu" name="sigungu" class="w-full px-3 py-3 rounded-xl bg-[#0c1424] border border-slate-600 text-sm text-white focus:outline-none focus:border-teal-400">
+                            <option value="">시/군/구</option>
+                        </select>
+                    </div>
+                    <input id="detail-address" name="detail-address" type="text" placeholder="상세주소를 입력해주세요" class="w-full px-4 py-3 rounded-xl bg-[#0c1424] border border-slate-600 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30">
+                </div>
+
+                <div>
+                    <label for="message" class="block text-xs font-bold text-slate-300 mb-1.5">문의내용<span class="text-rose-400 pl-0.5">*</span></label>
+                    <textarea id="message" name="message" rows="4" placeholder="상담 받으실 내용을 간단히 적어주세요." class="w-full px-4 py-3 rounded-xl bg-[#0c1424] border border-slate-600 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30"></textarea>
+                </div>
+
+                <!-- 개인정보 동의 -->
+                <div class="rounded-xl bg-[#0c1424] border border-slate-700 p-4">
+                    <div class="flex items-center justify-between gap-2">
+                        <label for="privacy_agree" class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" id="privacy_agree" name="privacy_agree" required class="w-5 h-5 accent-teal-400">
+                            <span class="text-sm font-bold">개인정보 수집·이용 동의 <span class="text-amber-400">(필수)</span></span>
+                        </label>
+                        <button type="button" onclick="togglePrivacy()" class="text-teal-300 text-xs font-bold underline underline-offset-2 shrink-0">자세히보기</button>
+                    </div>
+                    <div id="privacy_content" class="hidden mt-3 pt-3 border-t border-slate-700 text-xs text-slate-400 leading-relaxed space-y-1 max-h-40 overflow-y-auto">
+                        <h4 class="font-bold text-slate-200 mb-1">[개인정보 수집 및 이용 동의 안내]</h4>
+                        <p>1. 수집 항목: 성함, 연락처, 주소, 상담내용</p>
+                        <p>2. 수집 목적: 고객 상담 및 서비스 제공, 본인 확인</p>
+                        <p>3. 보유 및 이용기간: <strong class="text-slate-200">상담 완료 후 6개월 보관 후 즉시 파기</strong> (단, 관계 법령에 따라 보존이 필요한 경우 해당 기간까지 보관)</p>
+                        <p>4. 동의 거부 권리: 귀하는 개인정보 수집에 동의하지 않을 권리가 있습니다. 단, 거부 시 상담 신청 및 서비스 이용이 제한될 수 있습니다.</p>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-teal-400 hover:bg-teal-300 text-[#0c1424] font-black py-4 rounded-xl text-base transition-colors shadow-lg shadow-teal-500/20">
+                    <i class="fa-solid fa-paper-plane mr-1"></i> 상담 신청하기
+                </button>
+                <p id="form-status" class="hidden text-center text-sm font-bold"></p>
+            </form>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="px-5 pb-10">
+        <p class="text-[11px] font-bold text-teal-300 tracking-[0.2em]">FAQ</p>
+        <h2 class="text-xl font-black mt-1">🙋 {{ $region }} 지역 고객님들 궁금증 해결!</h2>
+        <p class="text-xs text-slate-400 mt-1 mb-5">{{ $category }} 서비스 이용 전 자주 묻는 질문들을 모았습니다.</p>
+
+        <div class="rounded-2xl border border-slate-700 overflow-hidden divide-y divide-slate-700">
+            <div class="bg-slate-800/60 p-5">
+                <h3 class="text-sm font-bold flex gap-2"><span class="text-teal-300 font-black">01</span>{{ $region }} 지역 출장 비용이 따로 있나요?</h3>
+                <p class="mt-2 pl-7 text-sm text-slate-300 leading-relaxed">
+                    저희는 {{ $region }} 인근에 상시 기사님이 대기 중이므로, 별도의 원거리 출장비를 청구하지 않습니다. 오직 작업 비용만 투명하게 안내해 드립니다.
+                </p>
+            </div>
+            <div class="bg-slate-800/60 p-5">
+                <h3 class="text-sm font-bold flex gap-2"><span class="text-teal-300 font-black">02</span>{{ $region }} 지역 {{ $category }} 작업 후 같은 곳이 또 막히면 어떻게 하나요?</h3>
+                <p class="mt-2 pl-7 text-sm text-slate-300 leading-relaxed">
+                    {{ $category }} 작업 후 동일한 원인으로 재발할 경우, 일정 기간 내에 <strong class="text-teal-300">무상 A/S를 원칙</strong>으로 하고 있습니다. 고객님의 만족과 신뢰를 최우선으로 생각합니다.
+                </p>
+            </div>
+            <div class="bg-slate-800/60 p-5">
+                <h3 class="text-sm font-bold flex gap-2"><span class="text-teal-300 font-black">03</span>{{ $category }} 카드 결제나 세금계산서 발행이 가능한가요?</h3>
+                <p class="mt-2 pl-7 text-sm text-slate-300 leading-relaxed">
+                    {{ $category }} 모든 작업 비용은 <strong class="text-white">현장 카드 결제 및 현금영수증 발행</strong>이 가능합니다. 법인 및 사업자 고객님들을 위한 세금계산서 발행도 도와드리고 있습니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 전화 상담 배너 -->
+    <section class="px-5 pb-10">
+        <a href="tel:050713266763" class="relative block rounded-3xl overflow-hidden bg-gradient-to-br from-indigo-600 via-indigo-500 to-teal-500 p-6 text-center shadow-xl shadow-indigo-900/40 active:scale-95 transition">
+            <i class="fa-solid fa-phone-volume absolute -left-4 -bottom-6 text-8xl text-white/10"></i>
+            <p class="relative text-sm font-medium text-indigo-50">{{ $region }} 지역 💦 변기/세면대/수전 교체 수리 전국24시 전문 상담!</p>
+            <p class="relative text-3xl font-black tracking-tighter mt-2">0507-1326-6763</p>
+            <p class="relative inline-block mt-3 text-xs font-bold bg-white/15 px-3 py-1 rounded-full">터치하여 전화연결</p>
+        </a>
+    </section>
+
+    <!-- 지역 검색 업체 (cat1~cat5) -->
+    <section class="px-5 pb-10">
+        <p class="text-[11px] font-bold text-teal-300 tracking-[0.2em]">NEARBY</p>
+        <h2 class="text-xl font-black mt-1 mb-5">{{ $region }} 지역 검색 업체</h2>
+
+        <div class="space-y-3">
+            {{ range $i, $cat := slice .Params.cat1 .Params.cat2 .Params.cat3 .Params.cat4 .Params.cat5 }}
+            {{ with $cat }}
+            <div class="rounded-2xl bg-slate-800/60 border border-slate-700 p-4">
+                <div class="flex items-start gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-teal-400/15 text-teal-300 text-sm font-black flex items-center justify-center shrink-0">{{ add $i 1 }}</span>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-[11px] text-slate-400">{{ $region }} 지역 {{ . }} 검색 업체</p>
+                        <p class="text-base font-black leading-snug break-all mt-0.5">{{ . }}</p>
+                        <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-location-dot text-teal-300 mr-1"></i><span class="font-bold text-slate-300">지번주소:</span> {{ $region }}</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2 mt-3">
+                    <a href="https://blog.naver.com/hobath0102" class="text-center text-[11px] font-bold py-2.5 rounded-lg bg-[#03C75A]/15 text-[#4ade80] border border-[#03C75A]/30 hover:bg-[#03C75A]/25">네이버에서 연락처 위치 확인</a>
+                    <a href="https://map.naver.com/p/search/0507%201326%206763/place/1163724693?c=15.00,0,0,0,dh&isCorrectAnswer=true&placePath=/home?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202606041226&locale=ko&svcName=map_pcv5&searchText=0507%201326%206763" class="text-center text-[11px] font-bold py-2.5 rounded-lg bg-slate-900 text-slate-200 border border-slate-600 hover:border-teal-400/60">전문 업체 확인</a>
+                </div>
+            </div>
+            {{ end }}
+            {{ end }}
+        </div>
+    </section>
+
+    <!-- 서비스 사진 -->
+    <section class="px-5 pb-10">
+        <p class="text-[11px] font-bold text-teal-300 tracking-[0.2em]">GALLERY</p>
+        <h2 class="text-xl font-black mt-1 mb-5">{{ $region }} {{ $category }} 서비스 사진</h2>
+
+        <div class="grid grid-cols-2 gap-3">
+            <figure class="col-span-2 rounded-2xl overflow-hidden border border-slate-700 aspect-[16/10]">
+                <img src="/images/2.jpg" alt="{{ $region }} {{ $category }} 서비스 사진1" class="w-full h-full object-cover">
+            </figure>
+            <figure class="rounded-2xl overflow-hidden border border-slate-700 aspect-square">
+                <img src="/images/3.jpg" alt="{{ $region }} {{ $category }} 서비스 사진2" class="w-full h-full object-cover">
+            </figure>
+            <figure class="rounded-2xl overflow-hidden border border-slate-700 aspect-square">
+                <img src="/images/4.jpg" alt="{{ $region }} {{ $category }} 서비스 사진3" class="w-full h-full object-cover">
+            </figure>
+            <figure class="rounded-2xl overflow-hidden border border-slate-700 aspect-square">
+                <img src="/images/5.jpg" alt="{{ $region }} {{ $category }} 서비스 사진4" class="w-full h-full object-cover">
+            </figure>
+            <figure class="rounded-2xl overflow-hidden border border-slate-700 aspect-square">
+                <img src="/images/6.jpg" alt="{{ $region }} {{ $category }} 서비스 사진5" class="w-full h-full object-cover">
+            </figure>
+        </div>
+
+        <a href="https://open.kakao.com/o/sHNNi3Fi" target="_blank" rel="noopener noreferrer" class="mt-5 flex items-center justify-center gap-2 bg-[#FEE500] hover:bg-[#FADA0A] text-[#191919] font-bold text-sm py-4 rounded-2xl">
+            <svg class="w-5 h-5 fill-[#191919]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.97 0-9 3.185-9 7.11 0 2.51 1.64 4.72 4.14 5.91-.18.66-.66 2.41-.76 2.79-.12.48.18.47.38.34.16-.11 2.6-1.76 3.65-2.47.51.08 1.04.13 1.59.13 4.97 0 9-3.185 9-7.11S16.97 3 12 3z"/></svg>
+            카카오톡 문의하기
+        </a>
+    </section>
+
+    {{ $sites := slice "doctor" "home" "cares" }}
+    {{ $targetSite := index (shuffle $sites) 0 }}
+    {{ $baseURL := printf "https://%s.housescares.com" $targetSite }}
+
+    <!-- 페이지 이동 -->
+    <nav class="flex flex-wrap justify-center items-center gap-1.5 mb-8 px-5 py-2">
+        {{ $currentID := int .Params.id }}
+        {{ $maxPages := 3000 }}
+
+        {{ if eq $currentID 0 }}{{ $currentID = 1 }}{{ end }}
+
+        {{ $start := (sub $currentID 5) }}
+        {{ $end := (add $currentID 5) }}
+
+        {{ if lt $start 1 }}{{ $start = 1 }}{{ end }}
+        {{ if gt $end $maxPages }}{{ $end = $maxPages }}{{ end }}
+
+        {{ range seq $start $end }}
+        {{ $isCurrent := eq (int .) (int $currentID) }}
+        <a href="{{ printf "%s/%d/" $baseURL . }}"
+           class="flex items-center justify-center min-w-[36px] h-9 px-2 rounded-full text-sm font-bold border transition-colors
+               {{ if $isCurrent }}bg-teal-400 border-teal-400 text-[#0c1424]{{ else }}bg-slate-800 border-slate-700 text-slate-400 hover:text-teal-300{{ end }}">
+            {{ . }}
+        </a>
+        {{ end }}
+    </nav>
+
+    <footer class="mx-5 border-t border-slate-700/60 pt-6 pb-6 text-center text-slate-500 text-xs leading-relaxed">
+        <p class="font-bold text-slate-300 mb-1">홈케어</p>
+        <p>대표번호 0507-1326-6763</p>
+        <p class="mt-2">© 2026 홈케어 | 본 사이트는 {{ $region }} {{ $category }} 전문 업체 안내 페이지입니다.</p>
+    </footer>
+</div>
+
+<!-- 하단 고정 바 -->
+<div class="fixed bottom-0 inset-x-0 z-50 bg-[#0c1424]/95 backdrop-blur border-t border-slate-700 p-2.5">
+    <div class="max-w-3xl mx-auto flex gap-2">
+        <a href="https://open.kakao.com/o/sHNNi3Fi" target="_blank" rel="noopener noreferrer" class="flex-1 bg-[#FEE500] hover:bg-[#FADA0A] text-[#191919] font-bold text-xs py-3.5 rounded-full flex items-center justify-center gap-1.5">
+            <svg class="w-4 h-4 fill-[#191919]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.97 0-9 3.185-9 7.11 0 2.51 1.64 4.72 4.14 5.91-.18.66-.66 2.41-.76 2.79-.12.48.18.47.38.34.16-.11 2.6-1.76 3.65-2.47.51.08 1.04.13 1.59.13 4.97 0 9-3.185 9-7.11S16.97 3 12 3z"/></svg>
+            카카오톡 문의
+        </a>
+        <a href="#consult" class="flex-1 bg-slate-800 border border-slate-600 text-white font-bold text-xs py-3.5 rounded-full flex items-center justify-center gap-1.5">
+            <i class="fa-regular fa-pen-to-square"></i> 상담 예약
+        </a>
+        <a href="tel:050713266763" class="flex-[1.4] bg-teal-400 hover:bg-teal-300 text-[#0c1424] font-black text-sm py-3.5 rounded-full flex items-center justify-center gap-1.5 shadow-lg shadow-teal-500/30">
+            <i class="fa-solid fa-phone animate-bounce"></i> 전화 연결
+        </a>
+    </div>
+</div>
+
+<!-- 플로팅 버튼 -->
+<div class="fixed bottom-20 right-4 z-50 flex flex-col gap-3">
+    <a href="tel:050713266763" class="relative flex items-center justify-center w-14 h-14 bg-teal-400 text-[#0c1424] rounded-full shadow-xl shadow-teal-500/40" title="전화 상담">
+        <span class="absolute inline-flex h-full w-full rounded-full bg-teal-300 opacity-60 animate-ping"></span>
+        <i class="relative fa-solid fa-phone text-xl"></i>
+    </a>
+    <a href="https://open.kakao.com/o/sHNNi3Fi" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center w-14 h-14 bg-[#FEE500] rounded-full shadow-xl hover:-translate-y-1 transition-transform" title="카카오톡 오픈채팅 문의">
+        <svg class="w-7 h-7 fill-[#191919]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.97 0-9 3.185-9 7.11 0 2.51 1.64 4.72 4.14 5.91-.18.66-.66 2.41-.76 2.79-.12.48.18.47.38.34.16-.11 2.6-1.76 3.65-2.47.51.08 1.04.13 1.59.13 4.97 0 9-3.185 9-7.11S16.97 3 12 3z"/></svg>
+    </a>
+</div>
+
+</div>
+
+<script>
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const status = document.getElementById("form-status");
+        const showStatus = function (msg, ok) {
+            status.textContent = msg;
+            status.className = "text-center text-sm font-bold " + (ok ? "text-teal-300" : "text-rose-400");
+        };
+
+        fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    alert('상담 신청이 정상적으로 접수되었습니다. 곧 연락드리겠습니다!')
+                    showStatus("상담 신청이 정상적으로 접수되었습니다. 곧 연락드리겠습니다!", true);
+                    form.reset();
+                } else {
+                    showStatus("전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.", false);
+                }
+            })
+            .catch(function () {
+                showStatus("전송 중 오류가 발생했습니다.", false);
+            });
+    });
+
+    const areaData = {
+        "서울특별시": [
+            "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구",
+            "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구",
+            "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"
+        ],
+        "부산광역시": [
+            "강서구", "금정구", "기장군", "남구", "동구", "동래구", "부산진구", "북구",
+            "사상구", "사하구", "서구", "수영구", "연제구", "영도구", "중구", "해운대구"
+        ],
+        "인천광역시": [
+            "강화군", "계양구", "남구", "남동구", "동구", "부평구", "서구", "연수구", "옹진군", "중구"
+        ],
+        "대구광역시": [
+            "중구", "동구", "서구", "남구", "북구", "수성구", "달서구", "달성군"
+        ],
+        "광주광역시": [
+            "동구", "서구", "남구", "북구", "광산구"
+        ],
+        "대전광역시": [
+            "동구", "중구", "서구", "유성구", "대덕구"
+        ],
+        "울산광역시": [
+            "중구", "남구", "동구", "북구", "울주군"
+        ],
+        "경기도": [
+            "가평군", "고양시", "과천시", "광명시", "광주시", "구리시", "군포시", "김포시",
+            "남양주시", "동두천시", "부천시", "성남시", "수원시", "시흥시", "안산시", "안성시",
+            "안양시", "양주시", "양평군", "여주시", "연천군", "오산시", "용인시", "의왕시",
+            "의정부시", "이천시", "파주시", "평택시", "포천시", "하남시", "화성시"
+        ],
+        "강원도": [
+            "원주시", "춘천시", "강릉시", "동해시", "속초시", "삼척시", "홍천군", "태백시",
+            "철원군", "횡성군", "평창군", "영월군", "정선군", "인제군", "고성군", "양양군",
+            "화천군", "양구군"
+        ],
+        "충청북도": [
+            "청주시", "충주시", "제천시", "보은군", "옥천군", "영동군", "증평군", "진천군",
+            "괴산군", "음성군", "단양군"
+        ],
+        "충청남도": [
+            "천안시", "공주시", "보령시", "아산시", "서산시", "논산시", "계룡시", "당진시",
+            "금산군", "부여군", "서천군", "청양군", "홍성군", "예산군", "태안군"
+        ],
+        "경상북도": [
+            "포항시", "경주시", "김천시", "안동시", "구미시", "영주시", "영천시", "상주시",
+            "문경시", "경산시", "군위군", "의성군", "청송군", "영양군", "영덕군", "청도군",
+            "고령군", "성주군", "칠곡군", "예천군", "봉화군", "울진군", "울릉군"
+        ],
+        "경상남도": [
+            "창원시", "김해시", "진주시", "양산시", "거제시", "통영시", "사천시", "밀양시",
+            "함안군", "거창군", "창녕군", "고성군", "하동군", "합천군", "남해군", "함양군",
+            "산청군", "의령군"
+        ],
+        "전라북도": [
+            "전주시", "익산시", "군산시", "정읍시", "완주군", "김제시", "남원시", "고창군",
+            "부안군", "임실군", "순창군", "진안군", "장수군", "무주군"
+        ],
+        "전라남도": [
+            "여수시", "순천시", "목포시", "광양시", "나주시", "무안군", "해남군", "고흥군",
+            "화순군", "영암군", "영광군", "완도군", "담양군", "장성군", "보성군", "신안군",
+            "장흥군", "강진군", "함평군", "진도군", "곡성군", "구례군"
+        ],
+        "제주특별자치도": [
+            "제주시", "서귀포시"
+        ]
+    };
+
+    function updateSigungu() {
+        const sigunguSelect = document.getElementById("sigungu");
+        const selectedSido = document.getElementById("sido").value;
+
+        sigunguSelect.innerHTML = '<option value="">시/군/구 선택</option>';
+
+        if (selectedSido && areaData[selectedSido]) {
+            areaData[selectedSido].forEach(function (city) {
+                const option = document.createElement("option");
+                option.value = city;
+                option.text = city;
+                sigunguSelect.add(option);
+            });
+        }
+    }
+
+    function togglePrivacy() {
+        document.getElementById("privacy_content").classList.toggle("hidden");
+    }
+</script>
+{{ end }}
