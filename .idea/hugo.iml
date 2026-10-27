@@ -3,8 +3,14 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/themes" />
+      <excludeFolder url="file://$MODULE_DIR$/resources" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/content_doctor_housescares.com" />
+      <excludeFolder url="file://$MODULE_DIR$/public_doctor_housescares.com" />
+      <excludePattern pattern="content_*" />
+      <excludePattern pattern="public_*" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

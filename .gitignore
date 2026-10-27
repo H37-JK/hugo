@@ -2,3 +2,9 @@
 .netlify
 .env
 .wrangler
+
+# 배포 스크립트가 생성하는 폴더 (매번 새로 만들어짐)
+content_*/
+public_*/
+resources/
+.hugo_build.lock
