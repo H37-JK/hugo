@@ -8,3 +8,8 @@ content_*/
 public_*/
 resources/
 .hugo_build.lock
+
+# Python 가상환경
+.venv/
+venv/
+__pycache__/
